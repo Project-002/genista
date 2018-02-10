@@ -24,22 +24,11 @@ class Dispatcher {
 		);
 		const matches = pattern.exec(message.content);
 		const args = message.content.substring(matches[1].length + (matches[2] ? matches[2].length : 0) + 1);
+		const subArgs = matches[3] ? args.trim().substring(matches[3].length + 1) : undefined;
 		if (!matches) return [false, false];
 
-		for (const command of this.client.registry.commands.values()) {
-			if (command.name === matches[2]) {
-				if (command.subCommands.length) {
-					for (const cmd of command.subCommands) {
-						if (cmd.name === matches[3]) { // eslint-disable-line max-depth
-							const subArgs = args.trim().substring(matches[3].length + 1);
-							return [cmd, subArgs];
-						}
-					}
-				}
-				return [command, args];
-			}
-			continue;
-		}
+		const [cmd] = this.client.registry.findCommands(matches[2], matches[3] ? matches[3] : undefined);
+		return [cmd, cmd.isSubCommand() ? subArgs : args];
 	}
 }
 

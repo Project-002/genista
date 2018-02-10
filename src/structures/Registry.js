@@ -69,6 +69,24 @@ class Registry {
 
 		return this.registerCommands(commands);
 	}
+
+	findCommands(search, subSearch = null) {
+		search = search.toLowerCase();
+		for (const command of this.commands.values()) {
+			if (command.name === search || (command.aliases && command.aliases.some(alias => alias === search))) {
+				if (subSearch && command.subCommands.length) {
+					for (const cmd of command.subCommands) {
+						// eslint-disable-next-line max-depth
+						if (cmd.name === subSearch || (cmd.aliases && cmd.aliases.some(alias => alias === subSearch))) {
+							return [cmd];
+						}
+					}
+				}
+				return [command];
+			}
+			continue;
+		}
+	}
 }
 
 module.exports = Registry;
