@@ -70,7 +70,7 @@ class Registry {
 		return this.registerCommands(commands);
 	}
 
-	findCommands(search, subSearch = null) {
+	findCommands(search, subSearch = null) { // eslint-disable-line consistent-return
 		search = search.toLowerCase();
 		for (const command of this.commands.values()) {
 			if (command.name === search || (command.aliases && command.aliases.some(alias => alias === search))) {

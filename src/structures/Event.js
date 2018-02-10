@@ -16,7 +16,7 @@ class Event {
 		}
 	}
 
-	run() {}
+	run(...args) {} // eslint-disable-line no-unused-vars
 }
 
 module.exports = Event;

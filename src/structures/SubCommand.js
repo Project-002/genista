@@ -13,7 +13,7 @@ class SubCommand {
 		return true;
 	}
 
-	async run(message) {}
+	async run(message, args) {} // eslint-disable-line no-unused-vars
 }
 
 module.exports = SubCommand;

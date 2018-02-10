@@ -26,7 +26,8 @@
 			"no-process-env": "off",
 			"id-length": "off",
 			"no-empty": "off",
-			"no-empty-function": "off"
+			"no-empty-function": "off",
+			"new-cap": "off"
 		}
 	}
 }
