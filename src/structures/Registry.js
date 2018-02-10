@@ -1,18 +1,52 @@
 const { readdirSync } = require('fs');
 const { extname, join } = require('path');
 
+/**
+ * The registry of a {@link Strelitzia} instance
+ */
 class Registry {
+	/**
+	 * Creates an instance of Registry.
+	 * @param {Strelitzia} client The client
+	 * @memberof Registry
+	 */
 	constructor(client) {
+		/**
+		 * The client instance
+		 * @name Registry#client
+		 * @readonly
+		 */
 		Object.defineProperty(this, 'client', { value: client });
 
+		/**
+		 * Cached event instances
+		 * @type {Map<string, Event>}
+		 */
 		this.events = new Map();
+
+		/**
+		 * Cached command instances
+		 * @type {Map<string, Command>}
+		 */
 		this.commands = new Map();
 	}
 
+	/**
+	 * Registers an event.
+	 * @param {string} event The event path to register
+	 * @returns {void}
+	 * @memberof Registry
+	 */
 	registerEvent(event) {
 		return this.registerEvents([event]);
 	}
 
+	/**
+	 * Registers multiple events.
+	 * @param {string[]} events The event paths
+	 * @returns {void}
+	 * @memberof Registry
+	 */
 	registerEvents(events) {
 		if (!Array.isArray(events)) return;
 		for (let event of events) {
@@ -24,6 +58,12 @@ class Registry {
 		}
 	}
 
+	/**
+	 * Registers event files from the specified path.
+	 * @param {string} path The path of the event files
+	 * @returns {void}
+	 * @memberof Registry
+	 */
 	registerEventsIn(path) {
 		const files = readdirSync(path);
 		const events = [];
@@ -36,10 +76,22 @@ class Registry {
 		return this.registerEvents(events);
 	}
 
+	/**
+	 * Registers a command.
+	 * @param {string} command The command path
+	 * @returns {void}
+	 * @memberof Registry
+	 */
 	registerCommand(command) {
 		return this.registerCommands([command]);
 	}
 
+	/**
+	 * Registers multiple commands.
+	 * @param {string[]} commands The command paths
+	 * @returns {void}
+	 * @memberof Registry
+	 */
 	registerCommands(commands) {
 		if (!Array.isArray(commands)) return;
 		const realCommands = [];
@@ -58,6 +110,12 @@ class Registry {
 		}
 	}
 
+	/**
+	 * Register command files from the specified path
+	 * @param {string} path The path of the command files
+	 * @returns {void}
+	 * @memberof Registry
+	 */
 	registerCommandsIn(path) {
 		const files = readdirSync(path);
 		const commands = [];
@@ -70,6 +128,13 @@ class Registry {
 		return this.registerCommands(commands);
 	}
 
+	/**
+	 * Finds a command or subcommand based on a string.
+	 * @param {string} search The term to search for
+	 * @param {?string} [subSearch=null] If the function should search for subcommands aswell
+	 * @returns {Array<Command|SubCommand>}
+	 * @memberof Registry
+	 */
 	findCommands(search, subSearch = null) { // eslint-disable-line consistent-return
 		search = search.toLowerCase();
 		for (const command of this.commands.values()) {
