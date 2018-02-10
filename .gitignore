@@ -15,6 +15,7 @@ pids
 .env
 
 # Test files
+test/
 
 # Miscellaneous
 .tmp/
