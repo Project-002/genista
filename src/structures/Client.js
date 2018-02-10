@@ -20,7 +20,7 @@ class Strelitzia extends EventEmitter {
 			await this.consumer.connect(url);
 			await this.consumer.subscribe(events);
 		} catch (error) {
-			console.error(error);
+			this.emit('error', this, error);
 		}
 	}
 }

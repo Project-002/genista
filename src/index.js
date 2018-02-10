@@ -3,5 +3,6 @@ module.exports = {
 	Client: require('./structures/Client'),
 
 	Event: require('./structures/Event'),
-	Command: require('./structures/Command')
+	Command: require('./structures/Command'),
+	SubCommand: require('./structures/SubCommand')
 };
