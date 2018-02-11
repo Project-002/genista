@@ -51,6 +51,12 @@ class Strelitzia extends EventEmitter {
 		this.consumer = new Amqp('consumer');
 
 		/**
+		 * The publisher of this client
+		 * @type {Amqp}
+		 */
+		this.publisher = new Amqp('publisher');
+
+		/**
 		 * The dispatcher of this client
 		 * @type {Dispatcher}
 		 */
@@ -72,6 +78,8 @@ class Strelitzia extends EventEmitter {
 	async login(url = 'localhost', events) {
 		try {
 			await this.consumer.connect(url);
+			await this.publisher.connect(url);
+
 			await this.consumer.subscribe(events);
 		} catch (error) {
 			this.emit('error', this, error);
