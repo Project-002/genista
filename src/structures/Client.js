@@ -57,6 +57,12 @@ class Strelitzia extends EventEmitter {
 		this.publisher = new Amqp('publisher');
 
 		/**
+		 * The lavalink of this client
+		 * @type {Amqp}
+		 */
+		this.lavalink = new Amqp('lavalink');
+
+		/**
 		 * The dispatcher of this client
 		 * @type {Dispatcher}
 		 */
@@ -79,6 +85,7 @@ class Strelitzia extends EventEmitter {
 		try {
 			await this.consumer.connect(url);
 			await this.publisher.connect(url);
+			await this.lavalink.connect(url);
 
 			await this.consumer.subscribe(events);
 		} catch (error) {
