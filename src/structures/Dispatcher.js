@@ -55,11 +55,12 @@ class Dispatcher {
 			`^(<@!?${this.client.id}>\\s+(?:${this.client.prefix}\\s*)?|${this.client.prefix}\\s*)([^\\s]+) ?([^\\s]+)?`, 'i'
 		);
 		const matches = pattern.exec(message.content);
-		const args = message.content.substring(matches[1].length + (matches[2] ? matches[2].length : 0) + 1);
-		const subArgs = matches[3] ? args.trim().substring(matches[3].length + 1) : undefined;
 		if (!matches) return [false, false];
+		const args = message.content.substring(matches[1].length + (matches[2] ? matches[2].length : 0) + 1);
+		const subArgs = matches[3] ? args.trim().substring(matches[3].length + 1) : null;
 
-		const [cmd] = this.client.registry.findCommands(matches[2], matches[3] ? matches[3] : undefined);
+		const [cmd] = this.client.registry.findCommands(matches[2], matches[3] ? matches[3] : null);
+		if (!cmd) return [false, false];
 		return [cmd, cmd.isSubCommand() ? subArgs : args];
 	}
 }
