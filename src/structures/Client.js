@@ -1,6 +1,7 @@
 const { EventEmitter } = require('events');
 const rest = require('@spectacles/rest');
 const { Amqp } = require('@spectacles/brokers');
+const Redis = require('ioredis');
 const Dispatcher = require('../structures/Dispatcher');
 const Registry = require('../structures/Registry');
 
@@ -57,10 +58,15 @@ class Strelitzia extends EventEmitter {
 		this.publisher = new Amqp('publisher');
 
 		/**
-		 * The lavalink of this client
-		 * @type {Amqp}
+		 * The redis of this client
+		 * @type {Redis}
 		 */
-		this.lavalink = new Amqp('lavalink');
+		this.redis = new Redis({
+			port: 6379,
+			host: '127.0.0.1',
+			family: 4,
+			db: 1
+		});
 
 		/**
 		 * The dispatcher of this client
@@ -85,7 +91,6 @@ class Strelitzia extends EventEmitter {
 		try {
 			await this.consumer.connect(url);
 			await this.publisher.connect(url);
-			await this.lavalink.connect(url);
 
 			await this.consumer.subscribe(events);
 		} catch (error) {
