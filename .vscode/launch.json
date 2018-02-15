@@ -4,7 +4,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Test Franxx",
+			"name": "Test Strelitzia",
 			"program": "${workspaceFolder}/test/index.js",
 			"envFile": "${workspaceFolder}/.env",
 			"showAsyncStacks": true
