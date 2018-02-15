@@ -7,7 +7,7 @@
 		"test": "env-cmd ./.env node --trace-warnings test/index.js",
 		"lint": "eslint src"
 	},
-	"repository": "https://github.com/0-0-2/strelitzia",
+	"repository": "https://github.com/Project-002/strelitzia",
 	"author": "iCrawl <icrawltogo@gmail.com>",
 	"license": "UNLICENSED",
 	"private": true,
