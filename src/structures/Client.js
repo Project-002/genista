@@ -1,6 +1,7 @@
 const { EventEmitter } = require('events');
 const rest = require('@spectacles/rest');
 const { Amqp } = require('@spectacles/brokers');
+const { Client: Cache } = require('@spectacles/cache');
 const Redis = require('ioredis');
 const Dispatcher = require('../structures/Dispatcher');
 const Registry = require('../structures/Registry');
@@ -58,6 +59,19 @@ class Strelitzia extends EventEmitter {
 		this.publisher = new Amqp('publisher');
 
 		/**
+		 * The cache of this client
+		 * @type {@spectacles/cache.Client}
+		 */
+		if (options.cache) {
+			this.cache = new Cache({
+				port: 6379,
+				host: '127.0.0.1',
+				family: 4,
+				db: 0
+			});
+		}
+
+		/**
 		 * The redis of this client
 		 * @type {Redis}
 		 */
@@ -89,8 +103,8 @@ class Strelitzia extends EventEmitter {
 	 */
 	async login(url = 'localhost', events) {
 		try {
-			await this.consumer.connect(url);
-			await this.publisher.connect(url);
+			const connection = await this.consumer.connect(url);
+			await this.publisher.connect(connection);
 
 			await this.consumer.subscribe(events);
 		} catch (error) {

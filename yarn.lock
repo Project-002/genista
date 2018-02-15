@@ -2,12 +2,20 @@
 # yarn lockfile v1
 
 
-"@spectacles/brokers@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@spectacles/brokers/-/brokers-0.1.0.tgz#2e5de9a4e104b162e2eceddd3ca7637f46c9373e"
+"@spectacles/brokers@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@spectacles/brokers/-/brokers-0.4.0.tgz#811947a30d6c5203b49654bf4a441c6bc4584585"
   dependencies:
     "@spectacles/util" "^0.1.1"
     amqplib "^0.5.2"
+  optionalDependencies:
+    ws "^4.0.0"
+
+"@spectacles/cache@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.2.1.tgz#49d2cf21273739621d010f72dde04661748dd0a8"
+  dependencies:
+    redis-p "^0.1.8"
 
 "@spectacles/rest@^0.3.0":
   version "0.3.1"
@@ -100,6 +108,10 @@ array-uniq@^1.0.1:
 arrify@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
+
+async-limiter@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -213,9 +225,9 @@ color-name@^1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
-combined-stream@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.5.tgz#938370a57b4a51dea2c77c15d5c5fdf895164009"
+combined-stream@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
   dependencies:
     delayed-stream "~1.0.0"
 
@@ -284,6 +296,10 @@ doctrine@^2.1.0:
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-2.1.0.tgz#5cd01fc101621b42c4cd7f5d1a66243716d3f39d"
   dependencies:
     esutils "^2.0.2"
+
+double-ended-queue@^2.1.0-0:
+  version "2.1.0-0"
+  resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
 
 env-cmd@^7.0.0:
   version "7.0.0"
@@ -444,11 +460,11 @@ follow-redirects@^1.2.5:
     debug "^3.1.0"
 
 form-data@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.1.tgz#6fb94fbd71885306d73d15cc497fe4cc4ecd44bf"
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.2.tgz#4970498be604c20c005d4f5c23aecd21d6b49099"
   dependencies:
     asynckit "^0.4.0"
-    combined-stream "^1.0.5"
+    combined-stream "1.0.6"
     mime-types "^2.1.12"
 
 fs.realpath@^1.0.0:
@@ -858,9 +874,24 @@ redis-commands@^1.2.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.3.1.tgz#81d826f45fa9c8b2011f4cd7a0fe597d241d442b"
 
-redis-parser@^2.4.0:
+redis-p@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/redis-p/-/redis-p-0.1.8.tgz#fe528c6ba3f7e2fc03f915ad0a6bdbcea1a48aa6"
+  dependencies:
+    redis "^2.8.0"
+    tsubaki "^1.2.0"
+
+redis-parser@^2.4.0, redis-parser@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
+
+redis@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/redis/-/redis-2.8.0.tgz#202288e3f58c49f6079d97af7a10e1303ae14b02"
+  dependencies:
+    double-ended-queue "^2.1.0-0"
+    redis-commands "^1.2.0"
+    redis-parser "^2.6.0"
 
 require-uncached@^1.0.3:
   version "1.0.3"
@@ -1002,6 +1033,10 @@ tmp@^0.0.33:
   dependencies:
     os-tmpdir "~1.0.2"
 
+tsubaki@^1.2.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/tsubaki/-/tsubaki-1.3.0.tgz#f9a2b10a37b343cc52892da9157e7e9d7e58d430"
+
 type-check@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"
@@ -1011,6 +1046,10 @@ type-check@~0.3.2:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+ultron@~1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.1.tgz#9fe1536a10a664a65266a1e3ccf85fd36302bc9c"
 
 util-deprecate@~1.0.1:
   version "1.0.2"
@@ -1035,6 +1074,14 @@ write@^0.2.1:
   resolved "https://registry.yarnpkg.com/write/-/write-0.2.1.tgz#5fc03828e264cea3fe91455476f7a3c566cb0757"
   dependencies:
     mkdirp "^0.5.1"
+
+ws@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-4.0.0.tgz#bfe1da4c08eeb9780b986e0e4d10eccd7345999f"
+  dependencies:
+    async-limiter "~1.0.0"
+    safe-buffer "~5.1.0"
+    ultron "~1.1.0"
 
 yallist@^2.1.2:
   version "2.1.2"
