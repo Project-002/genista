@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@spectacles/brokers@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@spectacles/brokers/-/brokers-0.4.0.tgz#811947a30d6c5203b49654bf4a441c6bc4584585"
+"@spectacles/brokers@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@spectacles/brokers/-/brokers-0.4.2.tgz#7a3e125dcda2b5c20dabff7cd7c724d962e3b8e9"
   dependencies:
     "@spectacles/util" "^0.1.1"
     amqplib "^0.5.2"
@@ -90,8 +90,8 @@ ansi-styles@^3.2.0:
     color-convert "^1.9.0"
 
 argparse@^1.0.7:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.9.tgz#73d83bc263f86e97f8cc4f6bae1b0e90a7d22c86"
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
   dependencies:
     sprintf-js "~1.0.2"
 
