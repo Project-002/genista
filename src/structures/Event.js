@@ -30,13 +30,6 @@ class Event {
 		this.name = options.name;
 
 		/**
-		 * The event type
-		 * @default 'event'
-		 * @type {string}
-		 */
-		this.type = 'event';
-
-		/**
 		 * If this event is enabled
 		 * @type {boolean}
 		 */
