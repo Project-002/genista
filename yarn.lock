@@ -11,15 +11,15 @@
   optionalDependencies:
     ws "^4.0.0"
 
-"@spectacles/cache@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.2.1.tgz#49d2cf21273739621d010f72dde04661748dd0a8"
+"@spectacles/cache@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.2.5.tgz#cec577f31f2a40d1e427249b3b01028373931b20"
   dependencies:
     redis-p "^0.1.8"
 
-"@spectacles/rest@^0.3.0":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@spectacles/rest/-/rest-0.3.1.tgz#88a51c3724bc2010013ebf35e1fcc9f208ded792"
+"@spectacles/rest@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@spectacles/rest/-/rest-0.3.2.tgz#dff065b3ee62dd1b3654cc00dc474d717c4fb8e5"
   dependencies:
     axios "^0.17.0"
     form-data "^2.3.1"
@@ -730,15 +730,15 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-mime-db@~1.30.0:
-  version "1.30.0"
-  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
+mime-db@~1.33.0:
+  version "1.33.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.33.0.tgz#a3492050a5cb9b63450541e39d9788d2272783db"
 
 mime-types@^2.1.12:
-  version "2.1.17"
-  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.17.tgz#09d7a393f03e995a79f8af857b70a9e0ab16557a"
+  version "2.1.18"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.18.tgz#6f323f60a83d11146f831ff11fd66e2fe5503bb8"
   dependencies:
-    mime-db "~1.30.0"
+    mime-db "~1.33.0"
 
 mimic-fn@^1.0.0:
   version "1.2.0"
