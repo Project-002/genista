@@ -41,6 +41,12 @@ class Strelitzia extends EventEmitter {
 		this.id = options.id;
 
 		/**
+		 * The clients user object
+		 * @type {string}
+		 */
+		this.me = null;
+
+		/**
 		 * The command prefix
 		 * @type {string}
 		 * @default '='
@@ -118,6 +124,8 @@ class Strelitzia extends EventEmitter {
 			await this.publisher.connect(connection);
 
 			await this.consumer.subscribe(events);
+
+			this.me = await this.cache.users.get(this.id);
 		} catch (error) {
 			this.emit('error', this, error);
 		}
