@@ -1,12 +1,12 @@
 /**
- * A command that can be ran
+ * A command that can be ran.
  */
 class Command {
 	/**
 	 * Options that are passed when creating a new command
 	 * @typedef {object} CommandOptions
 	 * @prop {string} [name] The command name
-	 * @prop {string[]} [aliases=[]] The command aliases
+	 * @prop {Array<string>} [aliases=[]] The command aliases
 	 * @prop {string} [description] The command description
 	 */
 
@@ -33,7 +33,7 @@ class Command {
 
 		/**
 		 * The command aliases
-		 * @type {string[]}
+		 * @type {Array<string>}
 		 * @default []
 		 */
 		this.aliases = options.aliases || [];
@@ -46,7 +46,7 @@ class Command {
 
 		/**
 		 * Array of subcommands, if any
-		 * @type {SubCommand[]}
+		 * @type {Array<SubCommand>}
 		 * @default []
 		 */
 		this.subCommands = [];
@@ -63,7 +63,7 @@ class Command {
 
 	/**
 	 * Runs the command.
-	 * @param {object} message The raw message data
+	 * @param {Object} message The raw message data
 	 * @param {string} args The parsed arguments
 	 * @abstract
 	 * @memberof Command

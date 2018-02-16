@@ -3,11 +3,12 @@ const rest = require('@spectacles/rest');
 const { Amqp } = require('@spectacles/brokers');
 const { Client: Cache } = require('@spectacles/cache');
 const Redis = require('ioredis');
+const axios = require('axios');
 const Dispatcher = require('../structures/Dispatcher');
 const Registry = require('../structures/Registry');
 
 /**
- * The Strelitzia client
+ * The Strelitzia client.
  * @extends {EventEmitter}
  */
 class Strelitzia extends EventEmitter {
@@ -82,6 +83,16 @@ class Strelitzia extends EventEmitter {
 			db: 1
 		});
 
+		if (options.weebsh) {
+			this.weebsh = axios.create({
+				baseURL: 'https://api.weeb.sh/',
+				headers: {
+					Authorization: process.env.WEEB_SH,
+					'User-Agent': 'Project-002/v0.1.0 (https://github.com/Project-002)'
+				}
+			});
+		}
+
 		/**
 		 * The dispatcher of this client
 		 * @type {Dispatcher}
@@ -98,7 +109,7 @@ class Strelitzia extends EventEmitter {
 	/**
 	 * Connects to the message broker.
 	 * @param {string} [url='localhost'] The URL of the message broker
-	 * @param {string[]} events Array of events
+	 * @param {Array<string>} events Array of events
 	 * @memberof Strelitzia
 	 */
 	async login(url = 'localhost', events) {

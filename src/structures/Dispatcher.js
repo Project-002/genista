@@ -1,5 +1,5 @@
 /**
- * A dispatcher for events
+ * A dispatcher for events.
  */
 class Dispatcher {
 	/**
@@ -27,14 +27,18 @@ class Dispatcher {
 		if (!this.shouldHandleMessage(message)) return;
 
 		let [cmd, args] = this.parseMessage(message);
-		if (!cmd) return;
+		if (!cmd && !args) return;
+		if (!cmd && args) {
+			this.client.emit('UNKNOWN_COMMAND', message, args);
+			return;
+		}
 
 		await cmd.run(message, args);
 	}
 
 	/**
 	 * Determines if a message object should be handled.
-	 * @param {object} message The raw message data
+	 * @param {Object} message The raw message data
 	 * @returns {boolean}
 	 * @memberof Dispatcher
 	 */
@@ -46,8 +50,8 @@ class Dispatcher {
 
 	/**
 	 * Parses the raw message data.
-	 * @param {object} message The raw message
-	 * @returns {?Array<Command|SubCommand, string>} The parsed message, containing the command
+	 * @param {Object} message The raw message
+	 * @returns {Array<Command|SubCommand, string>|Array<boolean, string|boolean>} The parsed message
 	 * and the arguments
 	 * @memberof Dispatcher
 	 */
@@ -61,7 +65,7 @@ class Dispatcher {
 		const subArgs = matches[3] ? args.trim().substring(matches[3].length + 1) : null;
 
 		const [cmd] = this.client.registry.findCommands(matches[2], matches[3] ? matches[3] : null);
-		if (!cmd) return [false, false];
+		if (!cmd) return [false, matches[2]];
 		return [cmd, cmd.isSubCommand() ? subArgs : args];
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * An event that will be processed by the {@link Strelitzia} instance
+ * An event that will be processed by the {@link Strelitzia} instance.
  */
 class Event {
 	/**
@@ -35,6 +35,12 @@ class Event {
 		 * @type {boolean}
 		 */
 		this.enabled = Boolean(options.enabled);
+
+		/**
+		 * If this event is a client event
+		 * @type {boolean}
+		 */
+		this.clientOnly = Boolean(options.client);
 	}
 
 	/**

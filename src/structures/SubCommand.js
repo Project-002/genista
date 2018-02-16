@@ -1,12 +1,12 @@
 /**
- * A subcommand that can be ran
+ * A subcommand that can be ran.
  */
 class SubCommand {
 	/**
 	 * Options that are passed when creating a new subcommand
 	 * @typedef {object} SubCommandOptions
 	 * @prop {string} [name] The subcommand name
-	 * @prop {string[]} [aliases=[]] The subcommand aliases
+	 * @prop {Array<string>} [aliases=[]] The subcommand aliases
 	 * @prop {string} [description] The subcommand description
 	 * @prop {string} [parent] The subcommand parent
 	 */
@@ -34,7 +34,7 @@ class SubCommand {
 
 		/**
 		 * The subcommand aliases
-		 * @type {string[]}
+		 * @type {Array<string>}
 		 * @default []
 		 */
 		this.aliases = options.aliases || [];
@@ -71,7 +71,7 @@ class SubCommand {
 
 	/**
 	 * Runs the subcommand.
-	 * @param {object} message The raw message data
+	 * @param {Object} message The raw message data
 	 * @param {string} args The parsed arguments
 	 * @abstract
 	 * @memberof SubCommand

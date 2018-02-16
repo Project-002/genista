@@ -2,7 +2,7 @@ const { readdirSync } = require('fs');
 const { extname, join } = require('path');
 
 /**
- * The registry of a {@link Strelitzia} instance
+ * The registry of a {@link Strelitzia} instance.
  */
 class Registry {
 	/**
@@ -44,7 +44,7 @@ class Registry {
 
 	/**
 	 * Registers multiple events.
-	 * @param {string[]} events The event paths
+	 * @param {Array<string>} events The event paths
 	 * @returns {void}
 	 * @memberof Registry
 	 */
@@ -55,7 +55,8 @@ class Registry {
 
 			this.events.set(event.name, event);
 
-			if (event.enabled) this.client.consumer.on(event.name, event._run.bind(event));
+			if (event.enabled && !event.clientOnly) this.client.consumer.on(event.name, event._run.bind(event));
+			if (event.enabled && event.clientOnly) this.client.on(event.name, event._run.bind(event));
 		}
 	}
 
@@ -89,7 +90,7 @@ class Registry {
 
 	/**
 	 * Registers multiple commands.
-	 * @param {string[]} commands The command paths
+	 * @param {Array<string>} commands The command paths
 	 * @returns {void}
 	 * @memberof Registry
 	 */
@@ -133,7 +134,7 @@ class Registry {
 	 * Finds a command or subcommand based on a string.
 	 * @param {string} search The term to search for
 	 * @param {?string} [subSearch=null] If the function should search for subcommands aswell
-	 * @returns {?Array<Command|SubCommand>}
+	 * @returns {Array<Command|SubCommand|null>}
 	 * @memberof Registry
 	 */
 	findCommands(search, subSearch = null) { // eslint-disable-line consistent-return
