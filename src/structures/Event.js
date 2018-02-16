@@ -19,6 +19,7 @@ class Event {
 		/**
 		 * The client instance
 		 * @name Event#client
+		 * @type {Strelitzia}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });
@@ -39,7 +40,7 @@ class Event {
 	/**
 	 * Runs the event if the event is enabled.
 	 * @private
-	 * @param {*[]} args The raw arguments received
+	 * @param {Array<*>} args The raw arguments received
 	 * @memberof Event
 	 */
 	async _run(...args) {
@@ -51,7 +52,7 @@ class Event {
 				 * Emmited when there was an error
 				 * @event Strelitzia#error
 				 * @prop {Strelitzia|Event} instance The instance where the error occured
-				 * @prop {*[]|Error|TypeError|RangeError} errorOrArgs The arguments passed or an error instance
+				 * @prop {Array<*>|Error|TypeError|RangeError} errorOrArgs The arguments passed or an error instance
 				 * @prop {?(Error|TypeError|RangeError)} error The error received
 				 */
 				this.client.emit('error', this, args, error);
@@ -61,7 +62,7 @@ class Event {
 
 	/**
 	 * Function that takes the event input and processes it.
-	 * @param {*[]} args The raw arguments received
+	 * @param {Array<*>} args The raw arguments received
 	 * @abstract
 	 * @memberof Event
 	 */

@@ -14,6 +14,7 @@ class Registry {
 		/**
 		 * The client instance
 		 * @name Registry#client
+		 * @type {Strelitzia}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

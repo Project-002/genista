@@ -21,6 +21,7 @@ class SubCommand {
 		/**
 		 * The client instance
 		 * @name SubCommand#client
+		 * @type {Strelitzia}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

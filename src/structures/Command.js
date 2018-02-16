@@ -20,6 +20,7 @@ class Command {
 		/**
 		 * The client instance
 		 * @name Command#client
+		 * @type {Strelitzia}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

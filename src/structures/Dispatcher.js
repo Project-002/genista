@@ -11,6 +11,7 @@ class Dispatcher {
 		/**
 		 * The client instance
 		 * @name Dispatcher#client
+		 * @type {Strelitzia}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });
