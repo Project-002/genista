@@ -132,6 +132,7 @@ class Command {
 	}
 
 	_parseArgs(argString, argCount = 0, allowSingleQuote = true) {
+		if (Array.isArray(argString)) [argString] = argString;
 		const re = allowSingleQuote ? /\s*(?:("|')([^]*?)\1|(\S+))\s*/g : /\s*(?:(")([^]*?)"|(\S+))\s*/g;
 		const result = [];
 		let match = [];
