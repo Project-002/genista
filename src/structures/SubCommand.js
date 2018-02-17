@@ -1,7 +1,10 @@
+const Command = require('./Command');
+
 /**
  * A subcommand that can be ran.
+ * @extends {Command}
  */
-class SubCommand {
+class SubCommand extends Command {
 	/**
 	 * Options that are passed when creating a new subcommand
 	 * @typedef {object} SubCommandOptions
@@ -18,36 +21,10 @@ class SubCommand {
 	 * @memberof SubCommand
 	 */
 	constructor(client, options = {}) {
-		/**
-		 * The client instance
-		 * @name SubCommand#client
-		 * @type {Strelitzia}
-		 * @readonly
-		 */
-		Object.defineProperty(this, 'client', { value: client });
+		super(client, { subCommands: null });
 
 		/**
-		 * The subcommand's name
-		 * @type {string}
-		 */
-		this.name = options.name;
-
-		/**
-		 * The subcommand aliases
-		 * @type {Array<string>}
-		 * @default []
-		 */
-		this.aliases = options.aliases || [];
-
-		/**
-		 * The subcommand's description
-		 * @type {?string}
-		 */
-		this.description = options.description;
-
-		/**
-		 * A useless value added by Crawl to denote that subcommands are subcommands
-		 * Use {@link SubCommand#isSubCommand} instead
+		 * Determines if the command is a subcommand or not
 		 * @type {boolean}
 		 * @default true
 		 */
@@ -58,15 +35,6 @@ class SubCommand {
 		 * @type {string}
 		 */
 		this.parent = options.parent;
-	}
-
-	/**
-	 * Determines if the command is a subcommand or not.
-	 * @returns {boolean}
-	 * @memberof SubCommand
-	 */
-	isSubCommand() {
-		return true;
 	}
 
 	/**

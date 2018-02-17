@@ -100,7 +100,7 @@ class Registry {
 		const realSubCommands = [];
 		for (let command of commands) {
 			if (typeof command === 'function') command = new command(this.client);
-			if (command.isSubCommand()) realSubCommands.push(command);
+			if (command.subCommand) realSubCommands.push(command);
 			else realCommands.push(command);
 		}
 
