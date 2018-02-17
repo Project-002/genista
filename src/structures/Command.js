@@ -45,6 +45,31 @@ class Command {
 		this.description = options.description;
 
 		/**
+		 * Options for throttling
+		 * @type {Object}
+		 */
+		this.throttling = options.throttling || null;
+
+		/**
+		 * Whether default handling is enabled
+		 * @type {boolean}
+		 */
+		this.defaultHandling = 'defaultHandling' in options ? options.defaultHandling : true;
+
+		/**
+		 * The regular expression triggers
+		 * @type {Array<RegExp>}
+		 */
+		this.patterns = options.patterns || null;
+
+		/**
+		 * Current throttling, mapped by user id
+		 * @private
+		 * @type {Map<string, Object>}
+		 */
+		this._throttles = new Map();
+
+		/**
 		 * Array of subcommands, if any
 		 * @type {Array<SubCommand>}
 		 * @default []
@@ -53,22 +78,57 @@ class Command {
 	}
 
 	/**
-	 * Determines if the command is a subcommand or not.
-	 * @returns {boolean}
+	 * Preparations before running the command.
+	 * @param {Object} message The raw message data
+	 * @param {string} args The parsed arguments
+	 * @returns {*}
 	 * @memberof Command
 	 */
-	isSubCommand() {
-		return false;
+	_run(message, args) {
+		const throttle = this._throttle(message.author.id);
+		if (throttle && throttle.usages + 1 > this.throttling.usages) {
+			const remaining = (throttle.start + (this.throttling.duration * 1000) - Date.now()) / 1000;
+			return this.client.rest.channels[message.channel_id].messages.create({
+				content: `You may not use this command again for another ${remaining.toFixed(1)} seconds.`
+			});
+		}
+		if (throttle) throttle.usages++;
+
+		return this.run(message, args);
 	}
 
 	/**
-	 * Runs the command.
+	 * Runs the actual command.
 	 * @param {Object} message The raw message data
 	 * @param {string} args The parsed arguments
 	 * @abstract
 	 * @memberof Command
 	 */
 	async run(message, args) {} // eslint-disable-line no-unused-vars
+
+	/**
+	 * Throttling bois
+	 * @private
+	 * @param {string} user ID of the user
+	 * @return {?Object}
+	 */
+	_throttle(user) {
+		if (!this.throttling) return null;
+
+		let throttle = this._throttles.get(user);
+		if (!throttle) {
+			throttle = {
+				start: Date.now(),
+				usages: 0,
+				timeout: setTimeout(() => {
+					this._throttles.delete(user);
+				}, this.throttling.duration * 1000)
+			};
+			this._throttles.set(user, throttle);
+		}
+
+		return throttle;
+	}
 }
 
 module.exports = Command;

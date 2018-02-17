@@ -19,7 +19,7 @@ class Dispatcher {
 
 	/**
 	 * Handle the message.
-	 * @param {object} message The raw message
+	 * @param {Object} message The raw message
 	 * @returns {void}
 	 * @memberof Dispatcher
 	 */
@@ -33,7 +33,7 @@ class Dispatcher {
 			return;
 		}
 
-		await cmd.run(message, args);
+		await cmd._run(message, args);
 	}
 
 	/**
@@ -51,11 +51,19 @@ class Dispatcher {
 	/**
 	 * Parses the raw message data.
 	 * @param {Object} message The raw message
-	 * @returns {Array<Command|SubCommand, string>|Array<boolean, string|boolean>} The parsed message
+	 * @returns {Array<Command|SubCommand|boolean, Array<RegExp>|string|boolean>} The parsed message
 	 * and the arguments
 	 * @memberof Dispatcher
 	 */
 	parseMessage(message) {
+		for (const command of this.client.registry.commands.values()) {
+			if (!command.patterns) continue;
+			for (const pattern of command.patterns) {
+				const matches = pattern.exec(message.content);
+				if (matches) return [command, matches];
+			}
+		}
+
 		const pattern = new RegExp(
 			`^(<@!?${this.client.id}>\\s+(?:${this.client.prefix}\\s*)?|${this.client.prefix}\\s*)([^\\s]+) ?([^\\s]+)?`, 'i'
 		);
@@ -66,7 +74,7 @@ class Dispatcher {
 
 		const [cmd] = this.client.registry.findCommands(matches[2], matches[3] ? matches[3] : null);
 		if (!cmd) return [false, matches[2]];
-		return [cmd, cmd.isSubCommand() ? subArgs : args];
+		return [cmd, cmd.subCommand ? subArgs : args];
 	}
 }
 
