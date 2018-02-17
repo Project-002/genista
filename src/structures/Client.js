@@ -72,8 +72,7 @@ class Strelitzia extends EventEmitter {
 		if (options.cache) {
 			this.cache = new Cache({
 				port: 6379,
-				host: '127.0.0.1',
-				family: 4,
+				host: process.env.REDIS,
 				db: 0
 			});
 		}
@@ -84,8 +83,7 @@ class Strelitzia extends EventEmitter {
 		 */
 		this.redis = new Redis({
 			port: 6379,
-			host: '127.0.0.1',
-			family: 4,
+			host: process.env.REDIS,
 			db: 1
 		});
 
