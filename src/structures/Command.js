@@ -86,12 +86,7 @@ class Command {
 	 */
 	_run(message, args) {
 		const throttle = this._throttle(message.author.id);
-		if (throttle && throttle.usages + 1 > this.throttling.usages) {
-			const remaining = (throttle.start + (this.throttling.duration * 1000) - Date.now()) / 1000;
-			return this.client.rest.channels[message.channel_id].messages.create({
-				content: `You may not use this command again for another ${remaining.toFixed(1)} seconds.`
-			});
-		}
+		if (throttle && throttle.usages + 1 > this.throttling.usages) return undefined;
 		if (throttle) throttle.usages++;
 
 		const realArgs = this._parseArgs(args);
