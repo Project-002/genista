@@ -13,13 +13,13 @@
 	"private": true,
 	"dependencies": {
 		"@spectacles/brokers": "^0.4.2",
-		"@spectacles/cache": "^0.2.5",
+		"@spectacles/cache": "^0.2.6",
 		"@spectacles/rest": "^0.3.2",
 		"ioredis": "^3.2.2"
 	},
 	"devDependencies": {
 		"env-cmd": "^7.0.0",
-		"eslint": "^4.17.0",
+		"eslint": "^4.18.0",
 		"eslint-config-aqua": "^2.0.1"
 	},
 	"eslintConfig": {

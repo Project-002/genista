@@ -11,9 +11,9 @@
   optionalDependencies:
     ws "^4.0.0"
 
-"@spectacles/cache@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.2.5.tgz#cec577f31f2a40d1e427249b3b01028373931b20"
+"@spectacles/cache@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.2.6.tgz#0b440cad0dd8eb60447b0e0399d5e4c2df79fe7d"
   dependencies:
     redis-p "^0.1.8"
 
@@ -333,9 +333,9 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^4.17.0:
-  version "4.17.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.17.0.tgz#dc24bb51ede48df629be7031c71d9dc0ee4f3ddf"
+eslint@^4.18.0:
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.18.0.tgz#ebd0ba795af6dc59aa5cee17938160af5950e051"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
