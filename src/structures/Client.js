@@ -14,7 +14,7 @@ const Registry = require('../structures/Registry');
 class Strelitzia extends EventEmitter {
 	/**
 	 * Options passed to Strelitzia when creating a new instance
-	 * @typedef {object} StrelitziaOptions
+	 * @typedef {Object} StrelitziaOptions
 	 * @prop {string} [token] The token
 	 * @prop {string} [id] The client ID
 	 * @prop {string} [prefix='='] The command prefix
