@@ -66,6 +66,12 @@ class Strelitzia extends EventEmitter {
 		this.publisher = new Amqp('publisher');
 
 		/**
+		 * The rpc of this client
+		 * @type {Amqp}
+		 */
+		this.rpc = new Amqp('rpc', { rpc: true });
+
+		/**
 		 * The cache of this client
 		 * @type {@spectacles/cache.Client}
 		 */
@@ -120,6 +126,7 @@ class Strelitzia extends EventEmitter {
 		try {
 			const connection = await this.consumer.connect(url);
 			await this.publisher.connect(connection);
+			await this.rpc.connect(connection);
 
 			await this.consumer.subscribe(events);
 
