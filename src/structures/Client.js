@@ -41,12 +41,6 @@ class Strelitzia extends EventEmitter {
 		this.id = options.id;
 
 		/**
-		 * The clients user object
-		 * @type {string}
-		 */
-		this.me = null;
-
-		/**
 		 * The command prefix
 		 * @type {string}
 		 * @default '='
@@ -114,6 +108,24 @@ class Strelitzia extends EventEmitter {
 		 * @type {Registry}
 		 */
 		this.registry = new Registry(this);
+
+		/**
+		 * The clients user object
+		 * @type {?string}
+		 * @private
+		 */
+		this._me = null;
+	}
+
+	get me() {
+		if (typeof this._me === 'undefined' || this._me === null) {
+			return this.rest.users[this.id].fetch().then(user => user);
+		}
+		return this._me;
+	}
+
+	set me(user) {
+		this._me = user;
 	}
 
 	/**
@@ -130,7 +142,7 @@ class Strelitzia extends EventEmitter {
 
 			await this.consumer.subscribe(events);
 
-			this.me = await this.cache.users.get(this.id);
+			this._me = await this.rest.users[this.id].fetch();
 		} catch (error) {
 			this.emit('error', this, error);
 		}
