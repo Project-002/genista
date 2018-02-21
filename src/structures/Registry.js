@@ -39,13 +39,19 @@ class Registry {
 
 		/**
 		 * Cached event instances
-		 * @type {Map<string, Event>}
+		 * @type {Collection<string, Event>}
 		 */
 		this.events = new Collection();
 
 		/**
+		 * Cached group instances
+		 * @type {Collection<string, Group>}
+		 */
+		this.groups = new Collection();
+
+		/**
 		 * Cached command instances
-		 * @type {Map<string, Command>}
+		 * @type {Collection<string, Command>}
 		 */
 		this.commands = new Collection();
 	}
