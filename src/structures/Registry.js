@@ -127,7 +127,7 @@ class Registry {
 			else if (Array.isArray(group)) group = new Group(this.client, ...group);
 			else if (!(group instanceof Group)) group = new Group(this.client, group.id, group.name, group.commands);
 
-			const existing = this.groups.set(group.id);
+			const existing = this.groups.get(group.id);
 			if (existing) {
 				existing.name = group.name;
 			} else {
