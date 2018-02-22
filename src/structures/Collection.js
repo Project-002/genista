@@ -79,8 +79,7 @@ class Collection extends Map {
 	/**
 	 * Obtains the first value(s) in this collection.
 	 * @param {number} [amount] Amount of values to obtain from the beginning
-	 * @returns {*|Array<*>} A single value if no amount is provided or an array of values, starting from the end if
-	 * amount is negative
+	 * @returns {*|Array<*>}
 	 */
 	first(amount) {
 		if (typeof amount === 'undefined') return this.values().next().value;
@@ -95,8 +94,7 @@ class Collection extends Map {
 	/**
 	 * Obtains the first key(s) in this collection.
 	 * @param {number} [amount] Amount of keys to obtain from the beginning
-	 * @returns {*|Array<*>} A single key if no amount is provided or an array of keys, starting from the end if
-	 * amount is negative
+	 * @returns {*|Array<*>}
 	 */
 	firstKey(amount) {
 		if (typeof amount === 'undefined') return this.keys().next().value;
@@ -112,8 +110,7 @@ class Collection extends Map {
 	 * Obtains the last value(s) in this collection. This relies on {@link Collection#array}, and thus the caching
 	 * mechanism applies here as well.
 	 * @param {number} [amount] Amount of values to obtain from the end
-	 * @returns {*|Array<*>} A single value if no amount is provided or an array of values, starting from the end if
-	 * amount is negative
+	 * @returns {*|Array<*>}
 	 */
 	last(amount) {
 		const arr = this.array();
@@ -127,8 +124,7 @@ class Collection extends Map {
 	 * Obtains the last key(s) in this collection. This relies on {@link Collection#keyArray}, and thus the caching
 	 * mechanism applies here as well.
 	 * @param {number} [amount] Amount of keys to obtain from the end
-	 * @returns {*|Array<*>} A single key if no amount is provided or an array of keys, starting from the end if
-	 * amount is negative
+	 * @returns {*|Array<*>}
 	 */
 	lastKey(amount) {
 		const arr = this.keyArray();
@@ -142,7 +138,7 @@ class Collection extends Map {
 	 * Obtains random value(s) from this collection. This relies on {@link Collection#array}, and thus the caching
 	 * mechanism applies here as well.
 	 * @param {number} [amount] Amount of values to obtain randomly
-	 * @returns {*|Array<*>} A single value if no amount is provided or an array of values
+	 * @returns {*|Array<*>}
 	 */
 	random(amount) {
 		let arr = this.array();
@@ -158,7 +154,7 @@ class Collection extends Map {
 	 * Obtains random key(s) from this collection. This relies on {@link Collection#keyArray}, and thus the caching
 	 * mechanism applies here as well.
 	 * @param {number} [amount] Amount of keys to obtain randomly
-	 * @returns {*|Array<*>} A single key if no amount is provided or an array
+	 * @returns {*|Array<*>}
 	 */
 	randomKey(amount) {
 		let arr = this.keyArray();
@@ -403,7 +399,7 @@ class Collection extends Map {
 
 	/**
 	 * Calls the `delete()` method on all items that have it.
-	 * @returns {Promise[]}
+	 * @returns {Array<Promise>}
 	 */
 	deleteAll() {
 		const returns = [];

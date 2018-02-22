@@ -210,7 +210,7 @@ class Registry {
 	/**
 	 * Finds a command or subcommand based on a string.
 	 * @param {string} search The term to search for
-	 * @param {?string} [subSearch=null] If the function should search for subcommands aswell
+	 * @param {string} [subSearch=null] If the function should search for subcommands aswell
 	 * @returns {Array<Command|SubCommand|null>}
 	 * @memberof Registry
 	 */

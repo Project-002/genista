@@ -67,8 +67,7 @@ class Dispatcher {
 	/**
 	 * Parses the raw message data.
 	 * @param {Object} message The raw message
-	 * @returns {Array<Command|SubCommand|boolean, Array<RegExp>|string|boolean>} The parsed message
-	 * and the arguments
+	 * @returns {Array<Command|SubCommand|boolean, Array<RegExp>|string|boolean>}
 	 * @memberof Dispatcher
 	 */
 	parseMessage(message) {
