@@ -70,7 +70,13 @@ class Command {
 		 * The command description
 		 * @type {?string}
 		 */
-		this.description = options.description;
+		this.description = options.description || null;
+
+		/**
+		 * The command format
+		 * @type {?string}
+		 */
+		this.format = options.format || null;
 
 		/**
 		 * Options for throttling
@@ -123,18 +129,31 @@ class Command {
 
 	/**
 	 * Runs the actual command.
+	 * @abstract
 	 * @param {Object} message The raw message data
 	 * @param {string} args The parsed arguments
-	 * @abstract
 	 * @memberof Command
 	 */
 	async run(message, args) {} // eslint-disable-line no-unused-vars
 
 	/**
-	 * Throttling bois
+	 * Creates a usage sring for the command.
+	 * @param {string} [args] A string of arguments
+	 * @param {string} [prefix=this.client.prefix] Prefix to use for the command
+	 * @param {Object} [user=this.client.me] User to use for the mention command
+	 * @returns {string}
+	 * @memberof Command
+	 */
+	usage(args, prefix = this.client.prefix, user = this.client.me) {
+		return this.constructor.usage(`${this.name}${args ? ` ${args}` : ''}`, prefix, user);
+	}
+
+	/**
+	 * Throttling bois.
 	 * @private
 	 * @param {string} user ID of the user
 	 * @return {?Object}
+	 * @memberof Command
 	 */
 	_throttle(user) {
 		if (!this.throttling) return null;
@@ -154,6 +173,15 @@ class Command {
 		return throttle;
 	}
 
+	/**
+	 * Parses an argument string into an array of arguments.
+	 * @private
+	 * @param {string|Array<string>} argString The argument string to parse
+	 * @param {number} [argCount=0] The number of arguments to extract from the string
+	 * @param {boolean} [allowSingleQuote=true] Whether or not single quotes should be allowed
+	 * @returns {Array<string>}
+	 * @memberof Command
+	 */
 	_parseArgs(argString, argCount = 0, allowSingleQuote = true) {
 		if (Array.isArray(argString)) [argString] = argString;
 		const re = allowSingleQuote ? /\s*(?:("|')([^]*?)\1|(\S+))\s*/g : /\s*(?:(")([^]*?)"|(\S+))\s*/g;
@@ -167,6 +195,32 @@ class Command {
 		}
 
 		return result;
+	}
+
+	/**
+	 * Creates a usage string for a command.
+	 * @static
+	 * @param {string} command A command and args
+	 * @param {string} [prefix=null] Prefix to use for the command
+	 * @param {string} [user=null] User to use for the mention command
+	 * @returns {string}
+	 * @memberof Command
+	 */
+	static usage(command, prefix = null, user = null) {
+		const cmd = command.replace(/ /g, '\xa0');
+		if (!prefix && !user) return `\`${cmd}\``;
+
+		let prefixPart;
+		if (prefix) {
+			if (prefix.length > 1 && !prefix.endsWith(' ')) prefix += ' ';
+			prefix = prefix.replace(/ /g, '\xa0');
+			prefixPart = `\`${prefix}${cmd}\``;
+		}
+
+		let mentionPart;
+		if (user) mentionPart = `\`@${user.username.replace(/ /g, '\xa0')}#${user.discriminator}\xa0${cmd}\``;
+
+		return `${prefixPart || ''}${prefix && user ? ' or ' : ''}${mentionPart || ''}`;
 	}
 }
 
