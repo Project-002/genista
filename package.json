@@ -19,7 +19,7 @@
 	},
 	"devDependencies": {
 		"env-cmd": "^7.0.0",
-		"eslint": "^4.18.1",
+		"eslint": "^4.18.2",
 		"eslint-config-aqua": "^2.0.1"
 	},
 	"eslintConfig": {
