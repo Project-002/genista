@@ -119,7 +119,10 @@ class Strelitzia extends EventEmitter {
 
 	get me() {
 		if (typeof this._me === 'undefined' || this._me === null) {
-			return this.rest.users[this.id].fetch().then(user => user);
+			return this.rest.users[this.id].fetch().then(user => {
+				this._me = user;
+				return user;
+			});
 		}
 		return this._me;
 	}
@@ -141,8 +144,6 @@ class Strelitzia extends EventEmitter {
 			await this.rpc.connect(connection);
 
 			await this.consumer.subscribe(events);
-
-			this._me = await this.rest.users[this.id].fetch();
 		} catch (error) {
 			this.emit('error', this, error);
 		}

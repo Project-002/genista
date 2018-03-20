@@ -45,6 +45,7 @@ class Dispatcher {
 		let [cmd, args] = this.parseMessage(message);
 		if (!cmd && !args) return;
 		const channel = await this.client.cache.channels.get(message.channel_id);
+		// eslint-disable-next-line camelcase
 		message.guild_id = channel ? channel.guild_id : null;
 		if (!cmd && args) {
 			this.client.emit('UNKNOWN_COMMAND', message, args);
