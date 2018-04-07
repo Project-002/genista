@@ -91,7 +91,7 @@ class Strelitzia extends EventEmitter {
 			this.weebsh = axios.create({
 				baseURL: 'https://api.weeb.sh/',
 				headers: {
-					Authorization: process.env.WEEB_SH,
+					'Authorization': process.env.WEEB_SH,
 					'User-Agent': 'Project-002/v0.1.0 (https://github.com/Project-002)'
 				}
 			});

@@ -42,7 +42,7 @@ class Dispatcher {
 	async handleMessage(message) {
 		if (!this.shouldHandleMessage(message)) return;
 
-		let [cmd, args] = this.parseMessage(message);
+		const [cmd, args] = this.parseMessage(message);
 		if (!cmd && !args) return;
 		const channel = await this.client.cache.channels.get(message.channel_id);
 		// eslint-disable-next-line camelcase

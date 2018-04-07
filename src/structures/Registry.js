@@ -63,7 +63,12 @@ class Registry {
 	 * @memberof Registry
 	 */
 	registerEvent(event) {
-		return this.registerEvents([event]);
+		if (typeof event === 'function') event = new event(this.client);
+
+		this.events.set(event.name, event);
+
+		if (event.enabled && !event.clientOnly) this.client.consumer.on(event.name, event._run.bind(event));
+		if (event.enabled && event.clientOnly) this.client.on(event.name, event._run.bind(event));
 	}
 
 	/**
@@ -74,13 +79,8 @@ class Registry {
 	 */
 	registerEvents(events) {
 		if (!Array.isArray(events)) return;
-		for (let event of events) {
-			if (typeof event === 'function') event = new event(this.client);
-
-			this.events.set(event.name, event);
-
-			if (event.enabled && !event.clientOnly) this.client.consumer.on(event.name, event._run.bind(event));
-			if (event.enabled && event.clientOnly) this.client.on(event.name, event._run.bind(event));
+		for (const event of events) {
+			this.registerEvent(event);
 		}
 	}
 
@@ -106,12 +106,25 @@ class Registry {
 	 * Registers a group.
 	 * @param {string|Array<string>} group The group
 	 * @param {string} name The name
+	 * @param {Array<Object>} commands The commands
 	 * @returns {void}
 	 * @memberof Registry
 	 */
-	registerGroup(group, name) {
-		if (typeof group === 'string') return this.registerGroups([[group, name]]);
-		return this.registerGroups([group]);
+	registerGroup(group, name, commands) {
+		if (typeof group === 'string') {
+			group = new Group(this.client, group, name, commands);
+		} else if (typeof group === 'function') {
+			group = new group(this.client);
+		} else if (typeof group === 'object' && !(group instanceof Group)) {
+			group = new Group(this.client, group.id, group.name, group.commands);
+		}
+
+		const existing = this.groups.get(group.id);
+		if (existing) {
+			existing.name = group.name;
+		} else {
+			this.groups.set(group.id, group);
+		}
 	}
 
 	/**
@@ -122,17 +135,9 @@ class Registry {
 	 */
 	registerGroups(groups) {
 		if (!Array.isArray(groups)) return;
-		for (let group of groups) {
-			if (typeof group === 'function') group = new group(this.client);
-			else if (Array.isArray(group)) group = new Group(this.client, ...group);
-			else if (!(group instanceof Group)) group = new Group(this.client, group.id, group.name, group.commands);
-
-			const existing = this.groups.get(group.id);
-			if (existing) {
-				existing.name = group.name;
-			} else {
-				this.groups.set(group.id, group);
-			}
+		for (const group of groups) {
+			if (Array.isArray(group)) this.registerGroup(...group);
+			else this.registerGroup(group);
 		}
 	}
 
@@ -143,7 +148,17 @@ class Registry {
 	 * @memberof Registry
 	 */
 	registerCommand(command) {
-		return this.registerCommands([command]);
+		if (typeof command === 'function') command = new command(this.client);
+		const group = this.groups.find(grp => grp.id === command.groupId);
+		command.group = group;
+		group.commands.set(command.name, command);
+		if (command.subCommand) {
+			const parent = this.commands.get(command.parent);
+			if (!parent) return;
+			parent.subCommands.push(command);
+		} else {
+			this.commands.set(command.name, command);
+		}
 	}
 
 	/**
@@ -154,22 +169,8 @@ class Registry {
 	 */
 	registerCommands(commands) {
 		if (!Array.isArray(commands)) return;
-		const realCommands = [];
-		const realSubCommands = [];
-		for (let command of commands) {
-			if (typeof command === 'function') command = new command(this.client);
-			const group = this.groups.find(grp => grp.id === command.groupId);
-			command.group = group;
-			group.commands.set(command.name, command);
-			if (command.subCommand) realSubCommands.push(command);
-			else realCommands.push(command);
-		}
-
-		for (const cmd of realCommands) this.commands.set(cmd.name, cmd);
-		for (const cmd of realSubCommands) {
-			const parent = this.commands.get(cmd.parent);
-			if (!parent) continue;
-			parent.subCommands.push(cmd);
+		for (const command of commands) {
+			this.registerCommand(command);
 		}
 	}
 
