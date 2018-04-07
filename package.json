@@ -23,7 +23,7 @@
 		"eslint-config-aqua": "^4.0.0"
 	},
 	"eslintConfig": {
-		"extends": "aqua",
+		"extends": "aqua/src/node",
 		"rules": {
 			"no-process-env": "off",
 			"id-length": "off",
