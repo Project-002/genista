@@ -2,27 +2,32 @@
 # yarn lockfile v1
 
 
-"@spectacles/brokers@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@spectacles/brokers/-/brokers-0.4.3.tgz#17b49dabc0cd383e18379a1062fea77873582a42"
+"@spectacles/brokers@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@spectacles/brokers/-/brokers-0.4.4.tgz#48249a2cb32ab2a1a4b37eaad56b524eb87bbd4b"
   dependencies:
     "@spectacles/util" "^0.1.1"
     amqplib "^0.5.2"
   optionalDependencies:
     ws "^4.0.0"
 
-"@spectacles/cache@^0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.2.9.tgz#286ccc0d3f1814a31521be8d2979f37a3efcaa3b"
+"@spectacles/cache@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.3.0.tgz#22620d234c7e5a0c7a8b239d1b966cdbd53aa0ec"
   dependencies:
-    redis-p "^0.1.8"
+    "@spectacles/types" "^0.1.1"
+    rejects "^0.3.1"
 
-"@spectacles/rest@^0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@spectacles/rest/-/rest-0.3.5.tgz#06daf93fd67662b15870259af989dfd9eb88bb65"
+"@spectacles/rest@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@spectacles/rest/-/rest-0.3.6.tgz#122a01ab0048abef2d84e69ba250add6f5493075"
   dependencies:
     axios "^0.17.0"
     form-data "^2.3.2"
+
+"@spectacles/types@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@spectacles/types/-/types-0.1.1.tgz#0e4849aff9a1715f3794c109e6f61711575e760e"
 
 "@spectacles/util@^0.1.1":
   version "0.1.2"
@@ -297,10 +302,6 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-double-ended-queue@^2.1.0-0:
-  version "2.1.0-0"
-  resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
-
 env-cmd@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/env-cmd/-/env-cmd-7.0.0.tgz#d1fcfea6e0cbe6bf50b7130221d568907b6349bd"
@@ -318,9 +319,9 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-aqua@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-aqua/-/eslint-config-aqua-2.0.1.tgz#fef4fe8ef8b7f63063e55968b58e34c79f058cbe"
+eslint-config-aqua@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-aqua/-/eslint-config-aqua-4.0.1.tgz#227d7270e865409d0599a51eaa8c517dc25328ca"
 
 eslint-scope@^3.7.1:
   version "3.7.1"
@@ -333,9 +334,9 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^4.19.0:
-  version "4.19.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.19.0.tgz#9e900efb5506812ac374557034ef6f5c3642fc4c"
+eslint@^4.19.1:
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.19.1.tgz#32d1d653e1d90408854bfb296f076ec7e186a300"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -874,28 +875,17 @@ redis-commands@^1.2.0:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/redis-commands/-/redis-commands-1.3.5.tgz#4495889414f1e886261180b1442e7295602d83a2"
 
-redis-p@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/redis-p/-/redis-p-0.1.8.tgz#fe528c6ba3f7e2fc03f915ad0a6bdbcea1a48aa6"
-  dependencies:
-    redis "^2.8.0"
-    tsubaki "^1.2.0"
-
-redis-parser@^2.4.0, redis-parser@^2.6.0:
+redis-parser@^2.4.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
-
-redis@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/redis/-/redis-2.8.0.tgz#202288e3f58c49f6079d97af7a10e1303ae14b02"
-  dependencies:
-    double-ended-queue "^2.1.0-0"
-    redis-commands "^1.2.0"
-    redis-parser "^2.6.0"
 
 regexpp@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-1.0.1.tgz#d857c3a741dce075c2848dcb019a0a975b190d43"
+
+rejects@^0.3.1:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/rejects/-/rejects-0.3.2.tgz#1973c199f147ff3bf015a30700d205228d8a5857"
 
 require-uncached@^1.0.3:
   version "1.0.3"
@@ -1036,10 +1026,6 @@ tmp@^0.0.33:
   resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
   dependencies:
     os-tmpdir "~1.0.2"
-
-tsubaki@^1.2.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/tsubaki/-/tsubaki-1.3.0.tgz#f9a2b10a37b343cc52892da9157e7e9d7e58d430"
 
 type-check@~0.3.2:
   version "0.3.2"
