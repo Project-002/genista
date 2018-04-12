@@ -11,9 +11,9 @@
   optionalDependencies:
     ws "^4.0.0"
 
-"@spectacles/cache@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.3.0.tgz#22620d234c7e5a0c7a8b239d1b966cdbd53aa0ec"
+"@spectacles/cache@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.3.1.tgz#c56499dbdde1c86623d2057de9b5b38f0cdb5f74"
   dependencies:
     "@spectacles/types" "^0.1.1"
     rejects "^0.3.1"
