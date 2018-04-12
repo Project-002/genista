@@ -11,11 +11,12 @@
   optionalDependencies:
     ws "^4.0.0"
 
-"@spectacles/cache@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.3.1.tgz#c56499dbdde1c86623d2057de9b5b38f0cdb5f74"
+"@spectacles/cache@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.3.3.tgz#cbe577cf0356e0cf14b143457c85d59178f02e54"
   dependencies:
     "@spectacles/types" "^0.1.1"
+    ioredis "^3.2.2"
     rejects "^0.3.1"
 
 "@spectacles/rest@^0.3.6":
