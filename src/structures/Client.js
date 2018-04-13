@@ -118,7 +118,7 @@ class Strelitzia extends EventEmitter {
 	}
 
 	get me() {
-		if (typeof this._me === 'undefined' || this._me === null) {
+		if (!this._me) {
 			return this.rest.users[this.id].fetch().then(user => {
 				this._me = user;
 				return user;
