@@ -892,8 +892,8 @@ regexpp@^1.0.1:
   resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-1.1.0.tgz#0e3516dd0b7904f413d2d4193dce4618c3a689ab"
 
 rejects@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/rejects/-/rejects-0.3.3.tgz#35c93266741973fd9330b86afb0b842a2019971b"
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/rejects/-/rejects-0.3.4.tgz#49be9df8a96a3c3a6c2440a39f19df3bb07cf40b"
 
 require-uncached@^1.0.3:
   version "1.0.3"
