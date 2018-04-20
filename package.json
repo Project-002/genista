@@ -14,7 +14,7 @@
 	"dependencies": {
 		"@spectacles/brokers": "^0.4.4",
 		"@spectacles/cache": "^0.3.7",
-		"@spectacles/rest": "^0.3.6",
+		"@spectacles/rest": "^0.4.0",
 		"ioredis": "^3.2.2"
 	},
 	"devDependencies": {
@@ -23,13 +23,6 @@
 		"eslint-config-aqua": "^4.0.0"
 	},
 	"eslintConfig": {
-		"extends": "aqua/src/node",
-		"rules": {
-			"no-process-env": "off",
-			"id-length": "off",
-			"no-empty": "off",
-			"no-empty-function": "off",
-			"new-cap": "off"
-		}
+		"extends": "aqua/src/node"
 	}
 }
