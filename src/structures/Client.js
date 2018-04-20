@@ -120,7 +120,7 @@ class Strelitzia extends EventEmitter {
 	get me() {
 		if (!this._me) {
 			return (async () => {
-				const user = await this.rest.users[this.id].fetch();
+				const user = await this.rest.users[this.id].get();
 				this._me = user;
 				return user;
 			})();
