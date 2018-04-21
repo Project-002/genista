@@ -6,7 +6,8 @@ class Event {
 	 * Options that are passed when creating a new event
 	 * @typedef {object} EventOptions
 	 * @prop {string} [name] The event name
-	 * @prop {boolean} [enabled] If the event should be enabled
+	 * @prop {boolean} [enabled=false] If the event should be enabled
+	 * @prop {boolean} [clientOnly=false] If the event is client only
 	 */
 
 	/**
@@ -33,12 +34,14 @@ class Event {
 		/**
 		 * If this event is enabled
 		 * @type {boolean}
+		 * @default false
 		 */
 		this.enabled = Boolean(options.enabled);
 
 		/**
 		 * If this event is a client event
 		 * @type {boolean}
+		 * @default false
 		 */
 		this.clientOnly = Boolean(options.client);
 	}
@@ -70,7 +73,7 @@ class Event {
 	 * @abstract
 	 * @memberof Event
 	 */
-	run(...args) {} // eslint-disable-line no-unused-vars
+	run(...args) {}
 }
 
 module.exports = Event;

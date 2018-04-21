@@ -106,17 +106,16 @@ class Registry {
 	 * Registers a group.
 	 * @param {string|Array<string>} group The group
 	 * @param {string} name The name
-	 * @param {Array<Object>} commands The commands
 	 * @returns {void}
 	 * @memberof Registry
 	 */
-	registerGroup(group, name, commands) {
+	registerGroup(group, name) {
 		if (typeof group === 'string') {
-			group = new Group(this.client, group, name, commands);
+			group = new Group(this.client, group, name);
 		} else if (typeof group === 'function') {
 			group = new group(this.client);
 		} else if (typeof group === 'object' && !(group instanceof Group)) {
-			group = new Group(this.client, group.id, group.name, group.commands);
+			group = new Group(this.client, group.id, group.name);
 		}
 
 		const existing = this.groups.get(group.id);

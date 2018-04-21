@@ -17,7 +17,7 @@
 const Collection = require('./Collection');
 
 class Group {
-	constructor(client, id, name, commands = null) {
+	constructor(client, id, name) {
 		/**
 		 * The client instance
 		 * @name Group#client
@@ -43,7 +43,6 @@ class Group {
 		 * @type {Collection<string, Command>}
 		 */
 		this.commands = new Collection();
-		if (commands) for (const command of commands) this.commands.set(command.name, command);
 	}
 }
 
