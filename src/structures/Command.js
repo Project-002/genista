@@ -119,7 +119,7 @@ class Command {
 	 * @memberof Command
 	 */
 	_run(message, args) {
-		if (this.client.isOwner(message.author.id)) {
+		if (!this.client.isOwner(message.author.id)) {
 			const throttle = this._throttle(message.author.id);
 			if (throttle && throttle.usages + 1 > this.throttling.usages) return undefined;
 			if (throttle) throttle.usages++;
