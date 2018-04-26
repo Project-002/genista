@@ -135,17 +135,9 @@ class Strelitzia extends EventEmitter {
 		this._me = user;
 	}
 
-	get owners() {
-		if (!this._owner) return null;
-		if (typeof this._owner === 'string') return [this.cache.users.get(this._owner)];
-		const owners = [];
-		for (const owner of this._owner) owners.push(this.cache.users.get(owner));
-		return owners;
-	}
-
-	isOwner(user) {
+	async isOwner(user) {
 		if (!this._owner) return false;
-		user = this.cache.users.get(user);
+		user = await this.cache.users.get(user);
 		if (!user) throw new RangeError('Unable to resolve user.');
 		if (typeof this._owner === 'string') return user.id === this._owner;
 		if (this._owner instanceof Array) return this._owner.includes(user.id);
