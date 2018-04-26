@@ -186,7 +186,7 @@ class Registry {
 			command = join(path, command);
 			const stats = statSync(command);
 			if (extname(command) === '.js' && !stats.isDirectory()) {
-				command = require(join(path, command));
+				command = require(command);
 				commands.push(command);
 			} else if (stats.isDirectory()) {
 				this.registerCommandsIn(command);
