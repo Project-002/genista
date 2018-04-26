@@ -119,9 +119,11 @@ class Command {
 	 * @memberof Command
 	 */
 	_run(message, args) {
-		const throttle = this._throttle(message.author.id);
-		if (throttle && throttle.usages + 1 > this.throttling.usages) return undefined;
-		if (throttle) throttle.usages++;
+		if (this.client.isOwner(message.author.id)) {
+			const throttle = this._throttle(message.author.id);
+			if (throttle && throttle.usages + 1 > this.throttling.usages) return undefined;
+			if (throttle) throttle.usages++;
+		}
 
 		const realArgs = this._parseArgs(args);
 		return this.run(message, realArgs);

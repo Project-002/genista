@@ -16,6 +16,7 @@ class Strelitzia extends EventEmitter {
 	 * Options passed to Strelitzia when creating a new instance
 	 * @typedef {Object} StrelitziaOptions
 	 * @prop {string} [token] The token
+	 * @prop {string|Array<string>|Set<string>} [owner] The owners
 	 * @prop {string} [id] The client ID
 	 * @prop {string} [prefix='='] The command prefix
 	 */
@@ -130,6 +131,24 @@ class Strelitzia extends EventEmitter {
 
 	set me(user) {
 		this._me = user;
+	}
+
+	get owners() {
+		if (!this.options.owner) return null;
+		if (typeof this.options.owner === 'string') return [this.cache.users.get(this.options.owner)];
+		const owners = [];
+		for (const owner of this.options.owners) owners.push(this.cache.users.get(owner));
+		return owners;
+	}
+
+	isOwner(user) {
+		if (!this.options.owner) return false;
+		user = this.cache.users.get(user);
+		if (!user) throw new RangeError('Unable to resolve user.');
+		if (typeof this.options.owner === 'string') return user.id === this.options.owner;
+		if (this.options.owner instanceof Array) return this.options.owner.includes(user.id);
+		if (this.options.owner instanceof Set) return this.options.owner.has(user.id);
+		throw new RangeError('The client\'s "owner" options is an unknown value');
 	}
 
 	/**
