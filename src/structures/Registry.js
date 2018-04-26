@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const { readdirSync } = require('fs');
+const { readdirSync, fstatSync } = require('fs');
 const { extname, join } = require('path');
 const Collection = require('./Collection');
 const Group = require('./Group');
@@ -183,9 +183,14 @@ class Registry {
 		const files = readdirSync(path);
 		const commands = [];
 		for (let command of files) {
-			if (extname(command) !== '.js') continue;
-			command = require(join(path, command));
-			commands.push(command);
+			command = join(path, command);
+			const stats = fstatSync(command);
+			if (extname(command) === '.js' && !stats.isDirectory()) {
+				command = require(join(path, command));
+				commands.push(command);
+			} else if (stats.isDirectory()) {
+				this.registerCommandsIn(command);
+			}
 		}
 
 		return this.registerCommands(commands);
