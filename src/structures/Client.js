@@ -116,6 +116,8 @@ class Strelitzia extends EventEmitter {
 		 * @private
 		 */
 		this._me = null;
+
+		this._owner = options.owner;
 	}
 
 	get me() {
@@ -134,21 +136,21 @@ class Strelitzia extends EventEmitter {
 	}
 
 	get owners() {
-		if (!this.options.owner) return null;
-		if (typeof this.options.owner === 'string') return [this.cache.users.get(this.options.owner)];
+		if (!this._owner) return null;
+		if (typeof this._owner === 'string') return [this.cache.users.get(this._owner)];
 		const owners = [];
-		for (const owner of this.options.owners) owners.push(this.cache.users.get(owner));
+		for (const owner of this._owner) owners.push(this.cache.users.get(owner));
 		return owners;
 	}
 
 	isOwner(user) {
-		if (!this.options.owner) return false;
+		if (!this._owner) return false;
 		user = this.cache.users.get(user);
 		if (!user) throw new RangeError('Unable to resolve user.');
-		if (typeof this.options.owner === 'string') return user.id === this.options.owner;
-		if (this.options.owner instanceof Array) return this.options.owner.includes(user.id);
-		if (this.options.owner instanceof Set) return this.options.owner.has(user.id);
-		throw new RangeError('The client\'s "owner" options is an unknown value');
+		if (typeof this._owner === 'string') return user.id === this._owner;
+		if (this._owner instanceof Array) return this._owner.includes(user.id);
+		if (this._owner instanceof Set) return this._owner.has(user.id);
+		throw new RangeError('The client\'s "owner" option is an unknown value');
 	}
 
 	/**
