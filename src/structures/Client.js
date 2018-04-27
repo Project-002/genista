@@ -137,7 +137,9 @@ class Strelitzia extends EventEmitter {
 
 	async isOwner(user) {
 		if (!this._owner) return false;
-		user = await this.cache.users.get(user);
+		// TODO: Uncomment when appell fixed the cache issue for users
+		// user = await this.cache.users.get(user);
+		user = { id: user = this._owner };
 		if (!user) throw new RangeError('Unable to resolve user.');
 		if (typeof this._owner === 'string') return user.id === this._owner;
 		if (this._owner instanceof Array) return this._owner.includes(user.id);
