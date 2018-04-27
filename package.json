@@ -13,7 +13,7 @@
 	"private": true,
 	"dependencies": {
 		"@spectacles/brokers": "^0.4.4",
-		"@spectacles/cache": "^0.3.7",
+		"@spectacles/cache": "^0.3.8",
 		"@spectacles/rest": "^0.4.1",
 		"ioredis": "^3.2.2"
 	},
