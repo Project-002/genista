@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+const Message = require('./Message');
+
 /**
  * A dispatcher for events.
  */
@@ -31,6 +33,8 @@ class Dispatcher {
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });
+
+		this._awaiting = new Set();
 	}
 
 	/**
@@ -44,15 +48,13 @@ class Dispatcher {
 
 		const [cmd, args] = this.parseMessage(message);
 		if (!cmd && !args) return;
-		const channel = await this.client.cache.channels.get(message.channel_id);
-		// eslint-disable-next-line camelcase
-		message.guild_id = channel ? channel.guild_id : null;
+		const cmdMsg = new Message(this.client, message, cmd, args, null);
 		if (!cmd && args) {
-			this.client.emit('UNKNOWN_COMMAND', message, args);
+			this.client.emit('UNKNOWN_COMMAND', cmdMsg);
 			return;
 		}
 
-		await cmd._run(message, args);
+		await cmd._run(cmdMsg);
 	}
 
 	/**
@@ -64,6 +66,7 @@ class Dispatcher {
 	shouldHandleMessage(message) {
 		if (message.author.bot) return false;
 		if (this.client.id === message.author.id) return false;
+		if (this._awaiting.has(message.author.id + message.channel_id)) return false;
 		return true;
 	}
 
@@ -86,12 +89,12 @@ class Dispatcher {
 			`^(<@!?${this.client.id}>\\s+(?:${this.client.prefix}\\s*)?|${this.client.prefix}\\s*)([^\\s]+) ?([^\\s]+)?`, 'i'
 		);
 		const matches = pattern.exec(message.content);
-		if (!matches) return [false, false];
+		if (!matches) return [null, null];
 		const args = message.content.substring(matches[1].length + (matches[2] ? matches[2].length : 0) + 1);
 		const subArgs = matches[3] ? args.trim().substring(matches[3].length + 1) : null;
 
 		const [cmd] = this.client.registry.findCommands(matches[2], matches[3] ? matches[3] : null);
-		if (!cmd) return [false, matches[2]];
+		if (!cmd) return [null, matches[2]];
 		return [cmd, cmd.subCommand ? subArgs : args];
 	}
 }
