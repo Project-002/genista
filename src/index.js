@@ -4,5 +4,9 @@ module.exports = {
 
 	Event: require('./structures/Event'),
 	Command: require('./structures/Command'),
-	SubCommand: require('./structures/SubCommand')
+	SubCommand: require('./structures/SubCommand'),
+
+	idToBinary: require('./util/idToBinary'),
+	paginate: require('./util/paginate'),
+	unindent: require('./util/unindent')
 };
