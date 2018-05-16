@@ -168,7 +168,6 @@ class Argument {
 	 * @return {Promise<ArgumentResult>}
 	 */
 	async obtain(msg, val, promptLimit = Infinity) {
-		console.log(this.type);
 		let empty = this.isEmpty(val, msg);
 		if (empty && this.default !== null) {
 			return {
