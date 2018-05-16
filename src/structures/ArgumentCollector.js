@@ -42,7 +42,13 @@ class ArgumentCollector {
 
 		let hasInfinite = false;
 		let hasOptional = false;
-		for (let i = 0; i < args.length; i++) this.args[i] = new Argument(this.client, args[i]);
+		for (let i = 0; i < args.length; i++) {
+			if (hasInfinite) throw new Error('No other argument may come after an infinite argument.');
+			if (args[i].default !== null) hasOptional = true;
+			else if (hasOptional) throw new Error('Required arguments may not come after optionsl arguments.');
+			this.args[i] = new Argument(this.client, args[i]);
+			if (this.args[i].infinite) hasInfinite = true;
+		}
 
 		/**
 		 * Maximum number of times to prompt for a single argument
