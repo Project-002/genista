@@ -21,7 +21,7 @@ class SubCommand extends Command {
 	 * @memberof SubCommand
 	 */
 	constructor(client, options = {}) {
-		super(client, { subCommands: null });
+		super(client, { ...options, subCommands: null });
 
 		/**
 		 * Determines if the command is a subcommand or not

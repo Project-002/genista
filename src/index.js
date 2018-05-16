@@ -8,7 +8,7 @@ module.exports = {
 	Collection: require('./structures/Collection'),
 	Command: require('./structures/Command'),
 	Event: require('./structures/Event'),
-	SubCommand: require('./structures/SubCommand'),
+	Subcommand: require('./structures/Subcommand'),
 
 	awaitMessages: require('./util/awaitMessages'),
 	idToBinary: require('./util/idToBinary'),
