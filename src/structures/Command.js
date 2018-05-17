@@ -87,7 +87,7 @@ class Command {
 		 */
 		this.throttling = options.throttling || null;
 
-		this.argsCollector = options.args ? new ArgumentCollector(client, options.args, options.argsPromptLimit) : null;
+		this.argsCollector = options.args ? new ArgumentCollector(client, options.args) : null;
 
 		/**
 		 * Whether default handling is enabled
@@ -129,17 +129,9 @@ class Command {
 			if (throttle) throttle.usages++;
 		}
 		if (this.argsCollector) {
-			const collArgs = this.argsCollector.args;
-			const count = collArgs[collArgs.length - 1].infinite ? Infinity : collArgs.length;
-			const provided = Message.parseArgs(message.args.trim(), count);
-
+			const provided = Message.parseArgs(message.args.trim(), this.argsCollector.args.length);
 			const result = await this.argsCollector.obtain(message, provided);
-			if (result.cancelled) {
-				if (result.prompts.length === 0) {
-					console.log('bla');
-				}
-				return console.log('cancelled command.');
-			}
+			if (result.cancelled) return;
 			message.args = result.values;
 		}
 

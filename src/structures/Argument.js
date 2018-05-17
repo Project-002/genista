@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const awaitMessages = require('../util/awaitMessages');
+const ArgumentUnionType = require('./ArgumentUnionType');
 
 /** A fancy argument */
 class Argument {
@@ -115,12 +115,6 @@ class Argument {
 		this.oneOf = typeof options.oneOf === 'undefined' ? null : options.oneOf;
 
 		/**
-		 * Whether the argument accepts an infinite number of values
-		 * @type {boolean}
-		 */
-		this.infinite = Boolean(options.infinite);
-
-		/**
 		 * Validator function for validating a value for the argument
 		 * @type {?Function}
 		 * @see {@link ArgumentType#validate}
@@ -140,12 +134,6 @@ class Argument {
 		 * @see {@link ArgumentType#isEmpty}
 		 */
 		this.emptyChecker = options.isEmpty || null;
-
-		/**
-		 * How long to wait for input (in seconds)
-		 * @type {number}
-		 */
-		this.wait = typeof options.wait === 'undefined' ? 30 : options.wait;
 	}
 
 	/**
@@ -167,71 +155,36 @@ class Argument {
 	 * @param {number} [promptLimit=Infinity] - Maximum number of times to prompt for the argument
 	 * @return {Promise<ArgumentResult>}
 	 */
-	async obtain(msg, val, promptLimit = Infinity) {
+	async obtain(msg, val) {
 		let empty = this.isEmpty(val, msg);
 		if (empty && this.default !== null) {
 			return {
 				value: typeof this.default === 'function' ? await this.default(msg, this) : this.default,
-				cancelled: null,
-				prompts: [],
-				answers: []
+				cancelled: null
 			};
 		}
-		if (this.inifite) return this.obtainInfinite(msg, val, promptLimit);
 
-		const wait = this.wait > 0 && this.wait === Infinity ? undefined : this.wait * 1000;
-		const prompts = [];
-		const answers = [];
+		let prompts = 0;
 		let valid = empty ? false : await this.validate(val, msg);
 
 		while (!valid || typeof valid === 'string') {
-			if (prompts.length >= promptLimit) {
+			if (prompts >= 1) {
+				await this.client.rest.channels[msg.channel_id].messages.post({ content: empty ? this.prompt : valid ? valid : '.' });
+
 				return {
 					value: null,
-					cancelled: 'promptLimit',
-					prompts,
-					answers
-				};
-			}
-
-			prompts.push(
-				await this.client.rest.channels[msg.channel_id].messages.post({
-					content: `${empty ? this.prompt : valid ? valid : `You are really giving me a hard time here, please try again!`}`
-				})
-			);
-
-			const responses = await awaitMessages(this.client, msg, msg2 => msg2.author.id === msg.author.id, { max: 1, time: wait });
-
-			if (responses && responses.size === 1) {
-				answers.push(responses.first());
-				val = answers[answers.length - 1].content;
-			} else {
-				return {
-					value: null,
-					cancelled: 'time',
-					prompts,
-					answers
-				};
-			}
-
-			if (val.toLowerCase() === 'cancel') {
-				return {
-					value: null,
-					cancelled: 'user',
-					prompts,
-					answers
+					cancelled: 'limit'
 				};
 			}
 
 			empty = this.isEmpty(val, msg);
 			valid = await this.validate(val, msg);
+			prompts++;
 		}
 
 		return {
 			value: await this.parse(val, msg),
-			cancelled: null,
-			prompts,
-			answers
+			cancelled: null
 		};
 	}
 
@@ -284,9 +237,9 @@ class Argument {
 
 		let type = client.registry.types.get(id);
 		if (type) return type;
-		/* type = new ArgumentUnionType(client, id);
+		type = new ArgumentUnionType(client, id);
 		client.registry.registerType(type);
-		return type; */
+		return type;
 	}
 }
 

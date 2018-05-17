@@ -23,9 +23,7 @@ class ArgumentCollector {
 	 * @param {ArgumentInfo[]} args - Arguments for the collector
 	 * @param {number} [promptLimit=Infinity] - Maximum number of times to prompt for a single argument
 	 */
-	constructor(client, args, promptLimit = Infinity) {
-		if (promptLimit === null) promptLimit = Infinity;
-
+	constructor(client, args) {
 		/**
 		 * The client instance
 		 * @name Command#client
@@ -40,21 +38,12 @@ class ArgumentCollector {
 		 */
 		this.args = new Array(args.length);
 
-		let hasInfinite = false;
 		let hasOptional = false;
 		for (let i = 0; i < args.length; i++) {
-			if (hasInfinite) throw new Error('No other argument may come after an infinite argument.');
 			if (args[i].default !== null) hasOptional = true;
 			else if (hasOptional) throw new Error('Required arguments may not come after optionsl arguments.');
 			this.args[i] = new Argument(this.client, args[i]);
-			if (this.args[i].infinite) hasInfinite = true;
 		}
-
-		/**
-		 * Maximum number of times to prompt for a single argument
-		 * @type {number}
-		 */
-		this.promptLimit = promptLimit;
 	}
 
 	/**
@@ -73,27 +62,22 @@ class ArgumentCollector {
 	 * Obtains values for the arguments, prompting if necessary.
 	 * @param {CommandMessage} msg - Message that the collector is being triggered by
 	 * @param {Array<*>} [provided=[]] - Values that are already available
-	 * @param {number} [promptLimit=this.promptLimit] - Maximum number of times to prompt for a single argument
 	 * @return {Promise<ArgumentCollectorResult>}
 	 */
-	async obtain(msg, provided = [], promptLimit = this.promptLimit) {
+	async obtain(msg, provided = []) {
 		this.client.dispatcher._awaiting.add(msg.author.id + msg.channel_id);
 		const values = {};
-		const results = [];
 
 		try {
 			for (let i = 0; i < this.args.length; i++) {
 				const arg = this.args[i];
-				const result = await arg.obtain(msg, arg.infinite ? provided.slice(i) : provided[i], promptLimit);
-				results.push(result);
+				const result = await arg.obtain(msg, provided[i]);
 
 				if (result.cancelled) {
 					this.client.dispatcher._awaiting.delete(msg.author.id + msg.channel_id);
 					return {
 						values: null,
-						cancelled: result.cancelled,
-						prompts: [].concat(...results.map(res => res.prompts)),
-						answers: [].concat(...results.map(res => res.answers))
+						cancelled: result.cancelled
 					};
 				}
 
@@ -107,9 +91,7 @@ class ArgumentCollector {
 		this.client.dispatcher._awaiting.delete(msg.author.id + msg.channel_id);
 		return {
 			values,
-			cancelled: null,
-			prompts: [].concat(...results.map(res => res.prompts)),
-			answers: [].concat(...results.map(res => res.answers))
+			cancelled: null
 		};
 	}
 }
