@@ -54,6 +54,12 @@ class Registry {
 		 * @type {Collection<string, Command>}
 		 */
 		this.commands = new Collection();
+
+		/**
+		 * Cached type instances
+		 * @type {Collection<string, Type>}
+		 */
+		this.types = new Collection();
 	}
 
 	/**
@@ -194,6 +200,49 @@ class Registry {
 		}
 
 		return this.registerCommands(commands);
+	}
+
+	/**
+	 * Registers a type.
+	 * @param {string} type The type
+	 * @returns {void}
+	 * @memberof Registry
+	 */
+	registerType(type) {
+		if (typeof type === 'function') type = new type(this.client);
+		this.types.set(type.id, type);
+	}
+
+	/**
+	 * Registers multiple types.
+	 * @param {Array<string>} types The types
+	 * @returns {void}
+	 * @memberof Registry
+	 */
+	registerTypes(types) {
+		if (!Array.isArray(types)) return;
+		for (const type of types) {
+			this.registerType(type);
+		}
+	}
+
+	/**
+	 * Register type files from the specified path
+	 * @param {string} path The path of the type files
+	 * @returns {void}
+	 * @memberof Registry
+	 */
+	registerTypesIn(path) {
+		const files = readdirSync(path);
+		const types = [];
+		for (let type of files) {
+			type = join(path, type);
+			if (extname(type) !== '.js') continue;
+			type = require(type);
+			types.push(type);
+		}
+
+		return this.registerTypes(types);
 	}
 
 	/**

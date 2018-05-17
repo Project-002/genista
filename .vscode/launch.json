@@ -5,8 +5,8 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Test Strelitzia",
-			"program": "${workspaceFolder}/test/index.js",
-			"envFile": "${workspaceFolder}/.env",
+			"program": "${workspaceFolder:strelitzia}/test/index.js",
+			"envFile": "${workspaceFolder:strelitzia}/.env",
 			"showAsyncStacks": true
 		}
 	]

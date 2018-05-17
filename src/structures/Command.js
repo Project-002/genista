@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+const ArgumentCollector = require('./ArgumentCollector');
+const Message = require('./Message');
+
 /**
  * A command that can be ran.
  */
@@ -84,6 +87,8 @@ class Command {
 		 */
 		this.throttling = options.throttling || null;
 
+		this.argsCollector = options.args ? new ArgumentCollector(client, options.args) : null;
+
 		/**
 		 * Whether default handling is enabled
 		 * @type {boolean}
@@ -114,19 +119,23 @@ class Command {
 	/**
 	 * Preparations before running the command.
 	 * @param {Object} message The raw message data
-	 * @param {string} args The parsed arguments
 	 * @returns {*}
 	 * @memberof Command
 	 */
-	async _run(message, args) {
+	async _run(message) {
 		if (!await this.client.isOwner(message.author.id)) {
 			const throttle = this._throttle(message.author.id);
 			if (throttle && throttle.usages + 1 > this.throttling.usages) return undefined;
 			if (throttle) throttle.usages++;
 		}
+		if (this.argsCollector) {
+			const provided = Message.parseArgs(message.args.trim(), this.argsCollector.args.length);
+			const result = await this.argsCollector.obtain(message, provided);
+			if (result.cancelled) return;
+			message.args = result.values;
+		}
 
-		const realArgs = this._parseArgs(args);
-		return this.run(message, realArgs);
+		return this.run(message, message.args ? message.args : message.parseArgs());
 	}
 
 	/**
@@ -173,30 +182,6 @@ class Command {
 		}
 
 		return throttle;
-	}
-
-	/**
-	 * Parses an argument string into an array of arguments.
-	 * @private
-	 * @param {string|Array<string>} argString The argument string to parse
-	 * @param {number} [argCount=0] The number of arguments to extract from the string
-	 * @param {boolean} [allowSingleQuote=true] Whether or not single quotes should be allowed
-	 * @returns {Array<string>}
-	 * @memberof Command
-	 */
-	_parseArgs(argString, argCount = 0, allowSingleQuote = true) {
-		if (Array.isArray(argString)) [argString] = argString;
-		const re = allowSingleQuote ? /\s*(?:("|')([^]*?)\1|(\S+))\s*/g : /\s*(?:(")([^]*?)"|(\S+))\s*/g;
-		const result = [];
-		let match = [];
-		argCount = argCount || argString.length;
-		while (--argCount && (match = re.exec(argString))) result.push(match[2] || match[3]);
-		if (match && re.lastIndex < argString.length) {
-			const re2 = allowSingleQuote ? /^("|')([^]*)\1$/g : /^(")([^]*)"$/g;
-			result.push(argString.substr(re.lastIndex).replace(re2, '$2'));
-		}
-
-		return result;
 	}
 
 	/**
