@@ -246,6 +246,21 @@ class Registry {
 	}
 
 	/**
+	 * Registers the default argument types to the registry
+	 * @return {void}
+	 * @memberof Registry
+	 */
+	registerDefaultTypes() {
+		this.registerTypes([
+			require('../types/Boolean'),
+			require('../types/Float'),
+			require('../types/Integer'),
+			require('../types/String'),
+			require('../types/Union')
+		]);
+	}
+
+	/**
 	 * Finds a group based on a string.
 	 * @param {string} search The term to search for
 	 * @returns {Array<Command|null>}
