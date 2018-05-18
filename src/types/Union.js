@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const { ArgumentType } = require('../');
+const ArgumentType = require('../structures/ArgumentType');
 
 /**
  * A type for command arguments that handles multiple other types

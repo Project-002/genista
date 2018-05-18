@@ -5,7 +5,6 @@ module.exports = {
 	Argument: require('./structures/Argument'),
 	ArgumentCollector: require('./structures/ArgumentCollector'),
 	ArgumentType: require('./structures/ArgumentType'),
-	ArgumentUnionType: require('./structures/ArgumentUnionType'),
 	Collection: require('./structures/Collection'),
 	Command: require('./structures/Command'),
 	Event: require('./structures/Event'),

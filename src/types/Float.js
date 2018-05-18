@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const { ArgumentType } = require('../');
+const ArgumentType = require('../structures/ArgumentType');
 
 class FloatArgumentType extends ArgumentType {
 	constructor(client) {
