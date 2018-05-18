@@ -255,8 +255,7 @@ class Registry {
 			require('../types/Boolean'),
 			require('../types/Float'),
 			require('../types/Integer'),
-			require('../types/String'),
-			require('../types/Union')
+			require('../types/String')
 		]);
 	}
 
