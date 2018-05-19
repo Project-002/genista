@@ -1,5 +1,5 @@
 /**
- * An event that will be processed by the {@link Strelitzia} instance.
+ * An event that will be processed by the {@link Genista} instance.
  */
 class Event {
 	/**
@@ -12,7 +12,7 @@ class Event {
 
 	/**
 	 * Creates an instance of Event.
-	 * @param {Strelitzia} client The client
+	 * @param {Genista} client The client
 	 * @param {EventOptions} [options={}] The event options
 	 * @memberof Event
 	 */
@@ -20,7 +20,7 @@ class Event {
 		/**
 		 * The client instance
 		 * @name Event#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });
@@ -59,7 +59,7 @@ class Event {
 			} catch (error) {
 				/**
 				 * Emmited when there was an error
-				 * @event Strelitzia#error
+				 * @event Genista#error
 				 * @param {?(Error|TypeError|RangeError)} error The error received
 				 */
 				this.client.emit('error', error);

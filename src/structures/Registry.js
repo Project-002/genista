@@ -20,19 +20,19 @@ const Collection = require('./Collection');
 const Group = require('./Group');
 
 /**
- * The registry of a {@link Strelitzia} instance.
+ * The registry of a {@link Genista} instance.
  */
 class Registry {
 	/**
 	 * Creates an instance of Registry.
-	 * @param {Strelitzia} client The client
+	 * @param {Genista} client The client
 	 * @memberof Registry
 	 */
 	constructor(client) {
 		/**
 		 * The client instance
 		 * @name Registry#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

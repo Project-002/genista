@@ -44,7 +44,7 @@ class Collector extends EventEmitter {
 		/**
 		 * The client instance
 		 * @name Collector#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

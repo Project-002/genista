@@ -44,14 +44,14 @@ class Argument {
 	 */
 
 	/**
-	 * @param {Strelitzia} client - Client the argument is for
+	 * @param {Genista} client - Client the argument is for
 	 * @param {ArgumentInfo} options - Information for the command argument
 	 */
 	constructor(client, options) {
 		/**
 		 * The client instance
 		 * @name Command#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

@@ -21,7 +21,7 @@ class Group {
 		/**
 		 * The client instance
 		 * @name Group#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

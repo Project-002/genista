@@ -1,5 +1,5 @@
 module.exports = {
-	Strelitzia: require('./structures/Client'),
+	Genista: require('./structures/Client'),
 	Client: require('./structures/Client'),
 
 	Argument: require('./structures/Argument'),

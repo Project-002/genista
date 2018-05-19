@@ -17,7 +17,7 @@
 /** A type for command arguments */
 class ArgumentType {
 	/**
-	 * @param {CommandoClient} client - The client the argument type is for
+	 * @param {Genista} client - The client the argument type is for
 	 * @param {string} id - The argument type ID (this is what you specify in {@link ArgumentInfo#type})
 	 */
 	constructor(client, id) {
@@ -28,7 +28,7 @@ class ArgumentType {
 		/**
 		 * Client that this argument type is for
 		 * @name ArgumentType#client
-		 * @type {CommandoClient}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

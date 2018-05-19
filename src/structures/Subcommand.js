@@ -16,7 +16,7 @@ class SubCommand extends Command {
 
 	/**
 	 * Creates an instance of SubCommand.
-	 * @param {Strelitzia} client The client
+	 * @param {Genista} client The client
 	 * @param {SubCommandOptions} [options={}] The subcommand options
 	 * @memberof SubCommand
 	 */

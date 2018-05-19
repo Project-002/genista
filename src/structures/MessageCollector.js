@@ -28,7 +28,7 @@ const Collector = require('./Collector');
  */
 class MessageCollector extends Collector {
 	/**
-	 * @param {Strelitzia} client The client
+	 * @param {Genista} client The client
 	 * @param {string} channel The channel id
 	 * @param {Function} filter The filter to be applied to this collector
 	 * @param {MessageCollectorOptions} options The options to be applied to this collector

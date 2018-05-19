@@ -1,5 +1,5 @@
 {
-	"name": "strelitzia",
+	"name": "genista",
 	"version": "0.1.0",
 	"description": ".",
 	"main": "src/index.js",
@@ -7,7 +7,7 @@
 		"test": "env-cmd ./.env node --trace-warnings test/index.js",
 		"lint": "eslint src"
 	},
-	"repository": "https://github.com/Project-002/strelitzia",
+	"repository": "https://github.com/Project-002/genista",
 	"author": "iCrawl <icrawltogo@gmail.com>",
 	"license": "UNLICENSED",
 	"private": true,

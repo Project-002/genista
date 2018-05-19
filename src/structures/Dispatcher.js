@@ -22,14 +22,14 @@ const Message = require('./Message');
 class Dispatcher {
 	/**
 	 * Creates a new instance of a Dispatcher.
-	 * @param {Strelitzia} client The client
+	 * @param {Genista} client The client
 	 * @memberof Dispatcher
 	 */
 	constructor(client) {
 		/**
 		 * The client instance
 		 * @name Dispatcher#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

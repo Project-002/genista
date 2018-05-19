@@ -22,7 +22,7 @@ class CommandMessage {
 		/**
 		 * The client instance
 		 * @name Message#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

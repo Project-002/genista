@@ -8,13 +8,13 @@ const Dispatcher = require('../structures/Dispatcher');
 const Registry = require('../structures/Registry');
 
 /**
- * The Strelitzia client.
+ * The Genista client.
  * @extends {EventEmitter}
  */
-class Strelitzia extends EventEmitter {
+class Genista extends EventEmitter {
 	/**
-	 * Options passed to Strelitzia when creating a new instance
-	 * @typedef {Object} StrelitziaOptions
+	 * Options passed to Genista when creating a new instance
+	 * @typedef {Object} GenistaOptions
 	 * @prop {string} [token] The token
 	 * @prop {string|Array<string>|Set<string>} [owner] The owners
 	 * @prop {string} [id] The client ID
@@ -22,9 +22,9 @@ class Strelitzia extends EventEmitter {
 	 */
 
 	/**
-	 * Creates an instance of Strelitzia.
-	 * @param {StrelitziaOptions} [options={}] The client options
-	 * @memberof Strelitzia
+	 * Creates an instance of Genista.
+	 * @param {GenistaOptions} [options={}] The client options
+	 * @memberof Genista
 	 */
 	constructor(options = {}) {
 		super();
@@ -88,15 +88,7 @@ class Strelitzia extends EventEmitter {
 			db: 1
 		});
 
-		if (options.weebsh) {
-			this.weebsh = axios.create({
-				baseURL: 'https://api.weeb.sh/',
-				headers: {
-					'Authorization': process.env.WEEB_SH,
-					'User-Agent': 'Project-002/v0.1.0 (https://github.com/Project-002)'
-				}
-			});
-		}
+		this.commands = axios.create({ baseURL: `http://${process.env.COMMAND_API}/` });
 
 		/**
 		 * The dispatcher of this client
@@ -149,7 +141,7 @@ class Strelitzia extends EventEmitter {
 	 * Connects to the message broker.
 	 * @param {string} [url='localhost'] The URL of the message broker
 	 * @param {Array<string>} events Array of events
-	 * @memberof Strelitzia
+	 * @memberof Genista
 	 */
 	async login(url = 'localhost', events) {
 		try {
@@ -165,4 +157,4 @@ class Strelitzia extends EventEmitter {
 	}
 }
 
-module.exports = Strelitzia;
+module.exports = Genista;

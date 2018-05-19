@@ -31,7 +31,7 @@ class Command {
 
 	/**
 	 * Creates an instance of Command.
-	 * @param {Strelitzia} client The client
+	 * @param {Genista} client The client
 	 * @param {CommandOptions} [options={}] The command options
 	 * @memberof Command
 	 */
@@ -39,7 +39,7 @@ class Command {
 		/**
 		 * The client instance
 		 * @name Command#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });

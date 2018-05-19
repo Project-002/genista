@@ -19,7 +19,7 @@ const Argument = require('./Argument');
 /** Obtains, validates, and prompts for argument values */
 class ArgumentCollector {
 	/**
-	 * @param {Strelitzia} client - Client the collector will use
+	 * @param {Genista} client - Client the collector will use
 	 * @param {ArgumentInfo[]} args - Arguments for the collector
 	 * @param {number} [promptLimit=Infinity] - Maximum number of times to prompt for a single argument
 	 */
@@ -27,7 +27,7 @@ class ArgumentCollector {
 		/**
 		 * The client instance
 		 * @name Command#client
-		 * @type {Strelitzia}
+		 * @type {Genista}
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });
