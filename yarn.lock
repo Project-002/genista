@@ -11,13 +11,13 @@
   optionalDependencies:
     ws "^4.0.0"
 
-"@spectacles/cache@^0.3.8":
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.3.8.tgz#57b6d979dfdd7793dd70143c5730b8716ad4eabf"
+"@spectacles/cache@^0.3.12":
+  version "0.3.12"
+  resolved "https://registry.yarnpkg.com/@spectacles/cache/-/cache-0.3.12.tgz#ee9ac278ed6f6a4dbe1db241199e903f96fb638f"
   dependencies:
-    "@spectacles/types" "^0.1.1"
+    "@spectacles/types" "^0.1.3"
     ioredis "^3.2.2"
-    rejects "^0.3.6"
+    rejects "^0.4.1"
 
 "@spectacles/rest@^0.4.1":
   version "0.4.1"
@@ -26,7 +26,7 @@
     axios "^0.17.0"
     form-data "^2.3.2"
 
-"@spectacles/types@^0.1.1":
+"@spectacles/types@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@spectacles/types/-/types-0.1.3.tgz#7317ad19fa4c6df62c081adf15925456a7fcdc58"
 
@@ -476,8 +476,8 @@ flexbuffer@0.0.6:
   resolved "https://registry.yarnpkg.com/flexbuffer/-/flexbuffer-0.0.6.tgz#039fdf23f8823e440c38f3277e6fef1174215b30"
 
 follow-redirects@^1.2.5:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.4.1.tgz#d8120f4518190f55aac65bb6fc7b85fcd666d6aa"
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.0.tgz#234f49cf770b7f35b40e790f636ceba0c3a0ab77"
   dependencies:
     debug "^3.1.0"
 
@@ -910,9 +910,9 @@ regexpp@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-1.1.0.tgz#0e3516dd0b7904f413d2d4193dce4618c3a689ab"
 
-rejects@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/rejects/-/rejects-0.3.6.tgz#1af2dc0564d4fdbbae74653308fac9a78eae49a0"
+rejects@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/rejects/-/rejects-0.4.1.tgz#af96cf472d53f1bb3848ad5071d5c0764399de1d"
 
 require-uncached@^1.0.3:
   version "1.0.3"
