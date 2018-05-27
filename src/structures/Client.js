@@ -49,6 +49,13 @@ class Genista extends EventEmitter {
 		this.prefix = options.prefix || '=';
 
 		/**
+		 * The amount of shards
+		 * @type {number}
+		 * @default 1
+		 */
+		this.shards = parseInt(options.shards, 10) || 1;
+
+		/**
 		 * The consumer of this client
 		 * @type {Amqp}
 		 */

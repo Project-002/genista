@@ -8,7 +8,8 @@ const client = new Genista({
 	token: process.env.DISCORD_TOKEN,
 	owner: '81440962496172032',
 	prefix: 'darling',
-	id: '411778853153800202',
+	shards: process.env.SHARDS,
+	id: process.env.USER_ID,
 	cache: true
 });
 
