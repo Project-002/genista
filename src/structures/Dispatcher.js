@@ -45,7 +45,7 @@ class Dispatcher {
 		const [cmd, args] = this.parseMessage(message);
 		if (!cmd && !args) return;
 		if (!cmd && args) {
-			this.client.emit('UNKNOWN_COMMAND', message);
+			this.client.emit('UNKNOWN_COMMAND', message, args);
 			return;
 		}
 
