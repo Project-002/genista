@@ -128,7 +128,7 @@ class Command {
 			args = result.values;
 		}
 
-		return this.run(message, args ? args : this.parseArgs());
+		return this.run(message, args);
 	}
 
 	/**
@@ -142,11 +142,12 @@ class Command {
 
 	/**
 	 * Parses an argument string into an array of arguments.
+	 * @param {string} args The args
 	 * @returns {Array<string>}
 	 * @memberof Command
 	 */
-	parseArgs() {
-		return this.constructor.parseArgs(this.args);
+	parseArgs(args) {
+		return this.constructor.parseArgs(args);
 	}
 
 	/**

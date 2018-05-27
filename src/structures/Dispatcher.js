@@ -82,16 +82,15 @@ class Dispatcher {
 		}
 
 		const pattern = new RegExp(
-			`^(<@!?${this.client.id}>\\s+(?:${this.client.prefix}\\s*)?|${this.client.prefix}\\s*)([^\\s]+) ?([^\\s]+)?`, 'i'
+			`^(<@!?${this.client.id}>\\s+(?:${this.client.prefix}\\s*)?|${this.client.prefix}\\s*)([^\\s]+)`, 'i'
 		);
 		const matches = pattern.exec(message.content);
 		if (!matches) return [null, null];
 		const args = message.content.substring(matches[1].length + (matches[2] ? matches[2].length : 0) + 1);
-		const subArgs = matches[3] ? args.trim().substring(matches[3].length + 1) : null;
 
-		const [cmd] = this.client.registry.findCommands(matches[2], matches[3] ? matches[3] : null);
+		const [cmd] = this.client.registry.findCommands(matches[2]);
 		if (!cmd) return [null, matches[2]];
-		return [cmd, cmd.subCommand ? subArgs : args];
+		return [cmd, args];
 	}
 }
 

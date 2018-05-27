@@ -5,12 +5,11 @@ class UNKNOWN_COMMAND extends Event {
 		super(...args, { name: 'UNKNOWN_COMMAND', enabled: true, client: true });
 	}
 
-	async run(message, args) {
+	run(message, args) {
 		const [cmd] = this.client.registry.findCommands('weebsh');
 		if (cmd) {
-			const command = { args };
-			const { data } = await this.client.api.post(`/discord/fun/weebsh`, command);
-			await this.client.rest.channels[message.channel_id].messages.post(data);
+			[args] = args.split(' ');
+			return cmd._run(message, args);
 		}
 	}
 }
