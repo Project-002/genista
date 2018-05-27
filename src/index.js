@@ -16,7 +16,7 @@ client.registry.registerEventsIn(join(__dirname, 'events'));
 
 client.on('error', console.error);
 
-client.login(process.env.RABBITMQ, ['discord:MESSAGE_CREATE', 'discord:GUILD_CREATE', 'lavalink:END']);
+client.login(process.env.RABBITMQ, ['discord:MESSAGE_CREATE', 'discord:GUILD_CREATE']);
 
 // Only for debugging purposes
 global.genista = client;

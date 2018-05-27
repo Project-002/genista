@@ -6,7 +6,6 @@ class GUILD_CREATE extends Event {
 	}
 
 	run(message, { ack }) {
-		console.log(message);
 		ack();
 	}
 }
