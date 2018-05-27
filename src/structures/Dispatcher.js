@@ -63,7 +63,6 @@ class Dispatcher {
 		if (message.webhook_id) return false;
 		if (message.author.bot) return false;
 		if (this.client.id === message.author.id) return false;
-		if (this._awaiting.has(message.author.id + message.channel_id)) return false;
 		return true;
 	}
 
