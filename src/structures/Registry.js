@@ -157,13 +157,7 @@ class Registry {
 		const group = this.groups.find(grp => grp.id === command.groupId);
 		command.group = group;
 		group.commands.set(command.name, command);
-		if (command.subCommand) {
-			const parent = this.commands.get(command.parent);
-			if (!parent) return;
-			parent.subCommands.push(command);
-		} else {
-			this.commands.set(command.name, command);
-		}
+		this.commands.set(command.name, command);
 	}
 
 	/**
@@ -278,23 +272,14 @@ class Registry {
 	/**
 	 * Finds a command or subcommand based on a string.
 	 * @param {string} search The term to search for
-	 * @param {string} [subSearch=null] If the function should search for subcommands aswell
 	 * @returns {Array<Command|SubCommand|null>}
 	 * @memberof Registry
 	 */
-	findCommands(search, subSearch = null) { // eslint-disable-line consistent-return
+	findCommands(search) { // eslint-disable-line consistent-return
 		if (!search) return [...this.commands.values()];
 		search = search.toLowerCase();
 		for (const command of this.commands.values()) {
 			if (command.name === search || (command.aliases && command.aliases.some(alias => alias === search))) {
-				if (subSearch && command.subCommands.length) {
-					for (const cmd of command.subCommands) {
-						// eslint-disable-next-line max-depth
-						if (cmd.name === subSearch || (cmd.aliases && cmd.aliases.some(alias => alias === subSearch))) {
-							return [cmd];
-						}
-					}
-				}
 				return [command];
 			}
 			continue;

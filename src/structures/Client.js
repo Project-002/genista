@@ -2,7 +2,6 @@ const { EventEmitter } = require('events');
 const rest = require('@spectacles/rest');
 const { Amqp } = require('@spectacles/brokers');
 const { default: Cache } = require('@spectacles/cache');
-const Redis = require('ioredis');
 const axios = require('axios');
 const Dispatcher = require('../structures/Dispatcher');
 const Registry = require('../structures/Registry');

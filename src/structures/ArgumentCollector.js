@@ -65,7 +65,6 @@ class ArgumentCollector {
 	 * @return {Promise<ArgumentCollectorResult>}
 	 */
 	async obtain(msg, provided = []) {
-		this.client.dispatcher._awaiting.add(msg.author.id + msg.channel_id);
 		const values = {};
 
 		try {
@@ -74,7 +73,6 @@ class ArgumentCollector {
 				const result = await arg.obtain(msg, provided[i]);
 
 				if (result.cancelled) {
-					this.client.dispatcher._awaiting.delete(msg.author.id + msg.channel_id);
 					return {
 						values: null,
 						cancelled: result.cancelled
@@ -84,11 +82,9 @@ class ArgumentCollector {
 				values[arg.key] = result.value;
 			}
 		} catch (error) {
-			this.client.dispatcher._awaiting.delete(msg.author.id + msg.channel_id);
 			throw error;
 		}
 
-		this.client.dispatcher._awaiting.delete(msg.author.id + msg.channel_id);
 		return {
 			values,
 			cancelled: null

@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-const Message = require('./Message');
-
 /**
  * A dispatcher for events.
  */
@@ -33,8 +31,6 @@ class Dispatcher {
 		 * @readonly
 		 */
 		Object.defineProperty(this, 'client', { value: client });
-
-		this._awaiting = new Set();
 	}
 
 	/**
@@ -48,13 +44,12 @@ class Dispatcher {
 
 		const [cmd, args] = this.parseMessage(message);
 		if (!cmd && !args) return;
-		const cmdMsg = new Message(this.client, message, cmd, args, null);
 		if (!cmd && args) {
-			this.client.emit('UNKNOWN_COMMAND', cmdMsg);
+			this.client.emit('UNKNOWN_COMMAND', message);
 			return;
 		}
 
-		await cmd._run(cmdMsg);
+		await cmd._run(message, args);
 	}
 
 	/**
