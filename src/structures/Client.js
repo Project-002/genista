@@ -85,17 +85,7 @@ class Genista extends EventEmitter {
 			});
 		}
 
-		/**
-		 * The redis of this client
-		 * @type {Redis}
-		 */
-		this.redis = new Redis({
-			port: 6379,
-			host: process.env.REDIS,
-			db: 1
-		});
-
-		this.commands = axios.create({ baseURL: `http://${process.env.COMMAND_API}/` });
+		this.api = axios.create({ baseURL: `http://${process.env.COMMAND_API}/` });
 
 		/**
 		 * The dispatcher of this client
