@@ -15,6 +15,7 @@
 		"@spectacles/brokers": "^0.4.4",
 		"@spectacles/cache": "^0.3.8",
 		"@spectacles/rest": "^0.4.1",
+		"common-tags": "^1.7.2",
 		"ioredis": "^3.2.2"
 	},
 	"devDependencies": {

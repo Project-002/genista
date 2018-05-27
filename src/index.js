@@ -1,17 +1,22 @@
-module.exports = {
-	Genista: require('./structures/Client'),
-	Client: require('./structures/Client'),
+require('dotenv').config();
+const Genista = require('./structures/Client');
+const { join } = require('path');
 
-	Argument: require('./structures/Argument'),
-	ArgumentCollector: require('./structures/ArgumentCollector'),
-	ArgumentType: require('./structures/ArgumentType'),
-	Collection: require('./structures/Collection'),
-	Command: require('./structures/Command'),
-	Event: require('./structures/Event'),
-	Subcommand: require('./structures/Subcommand'),
+process.on('unhandledRejection', console.error);
 
-	awaitMessages: require('./util/awaitMessages'),
-	idToBinary: require('./util/idToBinary'),
-	paginate: require('./util/paginate'),
-	unindent: require('./util/unindent')
-};
+const client = new Genista({
+	token: process.env.DISCORD_TOKEN,
+	owner: '81440962496172032',
+	prefix: 'darling',
+	id: '411778853153800202',
+	cache: true
+});
+
+client.registry.registerEventsIn(join(__dirname, 'events'));
+
+client.on('error', console.error);
+
+client.login(process.env.RABBITMQ, ['discord:MESSAGE_CREATE', 'discord:GUILD_CREATE', 'lavalink:END']);
+
+// Only for debugging purposes
+global.genista = client;

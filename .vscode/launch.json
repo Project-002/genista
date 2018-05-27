@@ -4,9 +4,9 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Test Strelitzia",
-			"program": "${workspaceFolder:strelitzia}/test/index.js",
-			"envFile": "${workspaceFolder:strelitzia}/.env",
+			"name": "Launch Genista",
+			"program": "${workspaceFolder:genista}/src/index.js",
+			"envFile": "${workspaceFolder:genista}/.env",
 			"showAsyncStacks": true
 		}
 	]
