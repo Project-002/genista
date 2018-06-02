@@ -12,7 +12,12 @@ const client = new Genista({
 	id: process.env.USER_ID,
 	cache: true
 });
-
+client.registry.registerGroups([
+	['fun', 'Fun'],
+	['music', 'Music'],
+	['util', 'Util']
+]);
+client.registry.registerCommandsIn(join(__dirname, 'commands'));
 client.registry.registerEventsIn(join(__dirname, 'events'));
 
 client.on('error', console.error);
