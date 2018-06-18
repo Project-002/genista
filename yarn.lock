@@ -19,9 +19,9 @@
     ioredis "^3.2.2"
     rejects "^0.4.1"
 
-"@spectacles/rest@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@spectacles/rest/-/rest-0.4.1.tgz#dc0d76912209ad46388fdb9fe6be8400d06ce2f7"
+"@spectacles/rest@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@spectacles/rest/-/rest-0.5.0.tgz#847b449a530853c3fc95d4725026ccda187b021a"
   dependencies:
     axios "^0.17.0"
     form-data "^2.3.2"
@@ -312,9 +312,9 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-dotenv@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
+dotenv@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
 
 "erlpack@github:discordapp/erlpack":
   version "0.1.0"

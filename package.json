@@ -14,12 +14,12 @@
 	"dependencies": {
 		"@spectacles/brokers": "^0.4.4",
 		"@spectacles/cache": "^0.3.12",
-		"@spectacles/rest": "^0.4.1",
+		"@spectacles/rest": "^0.5.0",
 		"common-tags": "^1.8.0",
 		"ioredis": "^3.2.2"
 	},
 	"devDependencies": {
-		"dotenv": "^5.0.1",
+		"dotenv": "^6.0.0",
 		"eslint": "^4.19.1",
 		"eslint-config-aqua": "^4.3.0"
 	},
