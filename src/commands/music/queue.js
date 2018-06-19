@@ -51,13 +51,13 @@ class Queue extends Command {
 				let tracks = await this.client.cache.redis.lrange(`playlists.${message.guild_id}`, 0, -1);
 				if (Object.keys(np).length) tracks = [np.track, ...tracks];
 
-				const { data } = await music.post('/decodetracks', tracks);
-
-				if (!data || !data.length) {
+				if (!np && !tracks) {
 					return this.client.rest.channels[message.channel_id].messages.post({
 						content: 'Can\'t show you what I don\'t have.'
 					});
 				}
+
+				const { data } = await music.post('/decodetracks', tracks);
 
 				const totalLength = data.reduce((prev, song) => prev + song.info.length, 0);
 				const paginated = paginate(data.slice(1), args);
