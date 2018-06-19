@@ -15,9 +15,10 @@ class Volume extends Command {
 	}
 
 	async run(message, args) {
+		if (!args) return;
 		const userVoiceChannel = await this.client.cache.guilds[message.guild_id].voice_states.get(message.author.id);
 		const selfVoiceChannel = await this.client.cache.guilds[message.guild_id].voice_states.get(this.client.id);
-		args = isNaN(args) ? 100 : parseInt(args, 10);
+		args = isNaN(args) ? 100 : parseInt(args, 10) >= 100 || parseInt(args, 10) < 0 ? 100 : parseInt(args, 10);
 
 		if (!userVoiceChannel || !userVoiceChannel.channel_id) {
 			return this.client.rest.channels[message.channel_id].messages.post({
