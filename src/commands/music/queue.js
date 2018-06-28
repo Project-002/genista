@@ -51,7 +51,7 @@ class Queue extends Command {
 				let tracks = await this.client.cache.redis.lrange(`playlists.${message.guild_id}`, 0, -1);
 				if (Object.keys(np).length) tracks = [np.track, ...tracks];
 
-				if (!np && !tracks) {
+				if ((!np && !tracks) || (!np.length && !tracks.length)) {
 					return this.client.rest.channels[message.channel_id].messages.post({
 						content: 'Can\'t show you what I don\'t have.'
 					});
