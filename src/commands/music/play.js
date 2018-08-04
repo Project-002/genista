@@ -1,7 +1,6 @@
 const Command = require('../../structures/Command');
 const idToBinary = require('../../util/idToBinary');
 const axios = require('axios');
-const { URL } = require('url');
 
 const music = axios.create({
 	baseURL: process.env.LAVALINK_REST,
@@ -60,13 +59,11 @@ class Play extends Command {
 		console.log(args);
 
 		let data;
-		let search = false;
 		try {
 			try {
 				data = (await music.get(`/loadtracks?identifier=${args[0]}`)).data;
-				if (!data || !data.length) throw new Error();
+				if (data.loadType === 'NO_MATCHES') throw new Error();
 			} catch (error) {
-				search = true;
 				data = (await music.get(`/loadtracks?identifier=ytsearch:${args.join(' ')}`)).data;
 			}
 		} catch (error) {
@@ -75,20 +72,19 @@ class Play extends Command {
 			});
 		}
 
-		if (!data || !data.length) {
+		if (data.loadType === 'NO_MATCHES') {
 			return this.client.rest.channels[message.channel_id].messages.post({
 				content: 'I know you hate to hear that, but even searching the universe I couldn\'t find what you were looking for.'
 			});
 		}
-		console.log([data[0]]);
 
 		await this.client.publisher.publish('lavalink:PLAY', {
 			guild: message.guild_id,
-			tracks: search ? [data[0]] : data
+			tracks: data.tracks
 		}, { expiration: '60000' });
 
 		return this.client.rest.channels[message.channel_id].messages.post({
-			content: `**Queued up:** \`${data[0].info.title}\``
+			content: `**Queued up:** \`${data.tracks[0].info.title}\``
 		});
 	}
 }
